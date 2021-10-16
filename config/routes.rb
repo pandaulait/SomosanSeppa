@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     sessions:      'public/devise/sessions',
     registrations: 'public/devise/registrations'
   }
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
   devise_for :admins,
   path: :admin,
   controllers: {
@@ -13,6 +16,7 @@ Rails.application.routes.draw do
   }
   
   scope module: :public do
-    root to: 'homes#top'  
+    root to: 'homes#top'
+    post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   end
 end
