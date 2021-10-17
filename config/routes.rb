@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'users/show'
+    get 'users/edit'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions:      'public/devise/sessions',
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
+    resources :users, only: [:show, :edit, :update]
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   end
