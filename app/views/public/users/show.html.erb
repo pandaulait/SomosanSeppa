@@ -2,11 +2,19 @@
 <p>Find me in app/views/public/users/show.html.erb</p>
 <table>
   <thead>
+    <th>ユーザー画像</th>
     <th>ユーザー名</th>
     <th>メール</th>
     <th>ステータス</th>
   </thead>
   <tbody>
+    <td>
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image %>
+      <% else %>
+       <%= image_tag 'no_image.jpg' %>
+      <% end %>
+    </td>
     <td><%= @user.name %>さん</td>
     <td><%= @user.email %></td>
     <td>
