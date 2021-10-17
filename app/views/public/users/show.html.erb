@@ -1,0 +1,24 @@
+<h1>Public::Users#show</h1>
+<p>Find me in app/views/public/users/show.html.erb</p>
+<table>
+  <thead>
+    <th>ユーザー名</th>
+    <th>メール</th>
+    <th>ステータス</th>
+  </thead>
+  <tbody>
+    <td><%= @user.name %>さん</td>
+    <td><%= @user.email %></td>
+    <td>
+      <% if @user.is_deleted == true%>
+        退会済み
+      <% else %>
+        在籍中
+      <% end %>
+    </td>
+  </tbody>
+</table>
+<% if @user.id == current_user.id %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<% end %>
+
