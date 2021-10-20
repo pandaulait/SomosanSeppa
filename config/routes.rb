@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
+
+
   namespace :public do
-    get 'users/show'
-    get 'users/edit'
+    get 'quizzes/show'
+    get 'quizzes/new'
+    get 'quizzes/edit'
+    get 'quizzes/index'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
@@ -24,5 +28,9 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update]
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+  end
+  
+  namespace :admin do
+    resources :categories, only: [:index, :create, :destroy]
   end
 end
