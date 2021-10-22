@@ -1,5 +1,6 @@
 class Admin::CategoriesController < ApplicationController
-  before_action :authenticate_admin!, only: [:index]
+  # before_action :authenticate_admin!, only: [:index]
+  before_action :admin_user
   def index
     @category = Category.new
     @categories = Category.all
@@ -26,6 +27,10 @@ class Admin::CategoriesController < ApplicationController
   end
   
   private
+  def admin_user
+    redirect_to root_path unless current_user.admin?
+  end
+  
   
   def category_params
     params.require(:category).permit(:content)

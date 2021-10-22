@@ -1,0 +1,50 @@
+<h1>Admin::Users#index</h1>
+<p>Find me in app/views/admin/users/index.html.erb</p>
+
+  <table>
+    <thead>
+      <th></th>
+      <th>ID</th>
+      <th>ユーザー名</th>
+      <th>管理権ステータス</th>
+      <th>退会ステータス</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td></td>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td>
+            <% if user.admin? %>
+              管理者
+            <% else %>
+              ユーザー
+            <% end %>
+          </td>
+
+          <% if user.is_deleted? %>
+            <td>退会済み</td>
+            <td>
+              <%= form_with model: user, url: admin_user_path(user), local:true do |f| %>
+                <%= f.hidden_field :is_deleted, :value => false %>
+                <%= f.submit 'アクティブにする' %>
+              <% end %>
+            </td>
+          <% else %>
+            <td>在籍中</td>
+            <td>
+              <%= form_with model: user, url: admin_user_path(user), local:true do |f| %>
+                <%= f.hidden_field :is_deleted, :value => true %>
+                <%= f.submit '退会済みにする' %>
+              <% end %>
+            </td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
