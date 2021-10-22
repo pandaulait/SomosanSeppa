@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+
   namespace :public do
     get 'quizzes/show'
     get 'quizzes/new'
@@ -32,5 +33,6 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :categories, only: [:index, :create, :destroy]
+    resources :users, only: [:index, :update]
   end
 end
