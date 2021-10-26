@@ -10,13 +10,20 @@
 
   </head>
 
-  <body>
+  <body class="container">
+    <%= render 'layouts/flash' %>
     <% if user_signed_in? %>
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
       <li>
         <%= link_to 'マイページ', user_path(current_user.id) %>
+      </li>
+      <li>
+        <%= link_to 'クイズ新規作成', new_quiz_path %>
+      </li>
+      <li>
+        <%= link_to 'クイズ一覧', quizzes_path %>
       </li>
     <% else %>
       <li>

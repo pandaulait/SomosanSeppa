@@ -1,2 +1,11 @@
 <h1>Public::Quizzes#edit</h1>
 <p>Find me in app/views/public/quizzes/edit.html.erb</p>
+<%= form_with model: @quiz, url: quiz_path(@quiz), local: true do |f| %>
+  <h2>問題文</h2>
+  <%= f.text_area :content, class: "form-control" %>
+  <%= render 'layouts/error_messages', obj: @quiz, column: :content %>
+  <h2>解説</h2>
+  <%= f.text_area :explanation, class: "form-control" %>
+  <%= render 'layouts/error_messages', obj: @quiz, column: :explanation%>
+  <%= f.submit '保存' %>
+<% end %>
