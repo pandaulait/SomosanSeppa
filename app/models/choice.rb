@@ -24,8 +24,8 @@ class Choice < ApplicationRecord
       i = 0
       while i < choices.count
         if choices[i].present?
-          choice = Choice.new(content: choices[i], is_answer: is_answers[i], quiz_id: quiz_id)
-          all_valid &= choice.save
+          @choice = Choice.new(content: choices[i], is_answer: is_answers[i], quiz_id: quiz_id)
+          all_valid &= @choice.save
           if all_valid
             puts choice
           end
