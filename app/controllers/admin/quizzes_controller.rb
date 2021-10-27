@@ -3,8 +3,8 @@ class Admin::QuizzesController < ApplicationController
   end
 
   def new
-    
-  
+    @quiz = Quiz.new
+
   end
 
   def edit

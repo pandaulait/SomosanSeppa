@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_10_23_142105) do
   end
 
   create_table "choices", force: :cascade do |t|
-    t.integer "question_id", null: false
+    t.integer "quiz_id", null: false
     t.string "content", null: false
     t.boolean "is_answer", null: false
     t.datetime "created_at", null: false
@@ -49,11 +49,12 @@ ActiveRecord::Schema.define(version: 2021_10_23_142105) do
 
   create_table "quizzes", force: :cascade do |t|
     t.integer "user_id"
-    t.text "content"
-    t.text "explanation"
-    t.integer "status"
+    t.text "content", null: false
+    t.text "explanation", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

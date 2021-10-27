@@ -1,2 +1,51 @@
-<h1>Public::Quizzes#new</h1>
-<p>Find me in app/views/public/quizzes/new.html.erb</p>
+<div class="row">
+  <div class="col-xl-3 col-lg-2 col-md-1"></div>
+  <div class="col-xl-6 col-lg-8 col-md-10 choices-area">
+    <%= form_with model: @quiz, url: quizzes_path, local: true do |f| %>
+      <h3>クイズ新規作成</h3>
+      
+      <%= f.text_area :content , :placeholder => "問題文を書こう(10〜200文字)\n(例)「そもさん」とは、どう言う意味？", class: "form-control mb-4" %>
+      <%= render 'layouts/error_messages', obj: @quiz, column: :content %>
+      <div class=" p-2">
+        <%= f.fields_for :choices do |i| %>
+          <div class="d-flex choice_input">
+            <%= check_box "choice", "is_answer",{multiple: true, class: "mx-2 my-auto"} %>
+            <%= i.text_field :choice, name: "quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
+            <input type="button" value="－" class="remove pluralBtn m-1">
+          </div>
+          <input type="button" value="フォームを追加" class="add pluralBtn btn btn-light my-2">
+        <% end %>
+      </div>
+      
+      <%= f.text_area :explanation , :placeholder => "解説(10〜500文字)\n(例)「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。",class: "form-control mb-3"%>
+      <%= render 'layouts/error_messages', obj: @quiz, column: :explanation %>
+      <%= f.submit '保存', class: "btn btn-light"%>
+    <% end %>
+    <div id="output"></div>
+  </div>
+  <div class="col-xl-3 col-lg-2 col-md-1"></div>
+</div>
+
+
+
+<script>
+  const choices_form = `<div class="d-flex choice_input">
+                          <%= check_box "choice", "is_answer",{multiple: true, class: "mx-2 my-auto" } %>
+                          <input name="quiz[choices][]" type="text" class="form-control target m-1" id="quiz_choices_choice" placeholder="選択肢">
+                          <input type="button" value="－" class="remove pluralBtn m-1">
+                        </div>`
+  $(document).on("click", ".add", function () {
+    // $(this).addClass("m-5");
+    $(choices_form).insertBefore(this);
+  });
+  $(document).on("click", ".remove", function () {
+    // $(this).addClass("m-5");
+    var target = $(this).parent()
+    if (target.parent().children(".choice_input").length > 1){
+      target.remove()
+    }
+  });
+</script>
+
+                          <!--<input name="quiz[choices][][is_answer]" type="hidden" value="false">-->
+                          <!--<input name="quiz[choices][][is_answer]" type="checkbox" value="true" id="quiz_choices_send">-->

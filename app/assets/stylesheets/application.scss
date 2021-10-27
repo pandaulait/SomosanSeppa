@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+
+body {
+  background-image: url("white_paperboard.png");
+  background-blend-mode: multiply;
+  background-color: #8ecdd8;
+}
+
+.choices-area{
+  background-image: url("white_paperboard.png");
+  background-blend-mode: multiply;
+  box-shadow: 1px 1px 5px 1px #89bcc5 inset;
+  background-color: #cde9ee;
+  border-radius: 10px;
+}
