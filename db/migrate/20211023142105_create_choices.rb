@@ -1,7 +1,7 @@
 class CreateChoices < ActiveRecord::Migration[5.2]
   def change
     create_table :choices do |t|
-      t.integer :question_id, null: false
+      t.integer :quiz_id, null: false
       t.string :content, null: false
       t.boolean :is_answer, null: false
 

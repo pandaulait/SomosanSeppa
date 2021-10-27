@@ -4,8 +4,49 @@
   <h2>問題文</h2>
   <%= f.text_area :content %>
   <%= render 'layouts/error_messages', obj: @quiz, column: :content %>
+  <div class="choices-area">
+    <%= f.fields_for :choices do |i| %>
+      <div class="d-flex choice_input">
+        <!--<%#= i.check_box :send, { name: "quiz[choices][][is_answer]"} , "true", "false"%>-->
+
+        <%= check_box "choice", "is_answer",{multiple: true } %>
+        <%= i.text_field :choice, name: "quiz[choices][]", class: "form-control target" ,:placeholder => "サンプルテキストサンプルテキストサンプルテキスト" %>
+        <input type="button" value="－" class="remove pluralBtn">
+      </div>
+      <input type="button" value="フォームを追加" class="add pluralBtn">
+    <% end %>
+  </div>
+
   <h2>解説</h2>
   <%= f.text_area :explanation %>
   <%= render 'layouts/error_messages', obj: @quiz, column: :explanation %>
   <%= f.submit '保存' %>
 <% end %>
+<div id="output"></div>
+
+
+
+<script>
+  const choices_form = `<div class="d-flex choice_input">
+                          <%= check_box "choice", "is_answer",{multiple: true} %>
+                          <input name="quiz[choices][]" type="text" class="form-control target" id="quiz_choices_choice" placeholder="サンプルテキストサンプルテキストサンプルテキスト">
+                          <input type="button" value="－" class="remove pluralBtn">
+                        </div>`
+  $(document).on("click", ".add", function () {
+    // $(this).addClass("m-5");
+    $(choices_form).insertBefore(this);
+  });
+  $(document).on("click", ".remove", function () {
+    // $(this).addClass("m-5");
+    var target = $(this).parent()
+    if (target.parent().children(".choice_input").length > 1){
+      target.remove()
+    }
+  });
+
+
+
+</script>
+
+                          <!--<input name="quiz[choices][][is_answer]" type="hidden" value="false">-->
+                          <!--<input name="quiz[choices][][is_answer]" type="checkbox" value="true" id="quiz_choices_send">-->

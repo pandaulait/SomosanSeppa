@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_10_23_142105) do
   end
 
   create_table "choices", force: :cascade do |t|
-    t.integer "question_id", null: false
+    t.integer "quiz_id", null: false
     t.string "content", null: false
     t.boolean "is_answer", null: false
     t.datetime "created_at", null: false
