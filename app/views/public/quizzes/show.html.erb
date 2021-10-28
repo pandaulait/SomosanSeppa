@@ -1,8 +1,12 @@
 <h1>Public::Quizzes#show</h1>
 <p>Find me in app/views/public/quizzes/show.html.erb</p>
 
-<%= @quiz.content %>
-<%= @quiz.explanation %>
-<%= @quiz.user.name %>
+<%= @quiz.content %><br/>
+<%= @quiz.explanation %><br/>
+<%= @quiz.user.name %><br/>
+senntakusi
+<% @choices.each do |choice| %>
+  <%= choice.content %><br/>
+<% end %>
 
 <%= link_to '編集', edit_quiz_path(@quiz) %>
