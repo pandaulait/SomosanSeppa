@@ -1,0 +1,6 @@
+<% if @choice.errors.any? %>
+  $('.content-error_messages').html('<%= j(render 'layouts/error_messages', obj: @choice, column: :content) %>');
+<% else %>
+  $('.modal-area').fadeOut();
+  $('.close-btn').fadeOut();
+<% end %>

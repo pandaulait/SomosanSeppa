@@ -1,0 +1,5 @@
+$('.modal-area').remove();
+
+$('.quiz-area').before('<%= j(render 'new', quiz: @quiz, choice: @choice) %>');
+$('.modal-area').fadeIn();
+$('.close-btn').fadeIn();

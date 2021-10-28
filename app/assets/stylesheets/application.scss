@@ -14,17 +14,25 @@
  *= require_self
  */
 @import "bootstrap";
+$cMain: #8ecdd8;
+$cLightMain: #cde9ee;
+
+
 
 body {
   background-image: url("handmadepaper.png");
   background-blend-mode: multiply;
-  background-color: #8ecdd8;
+  background-color: $cMain;
 }
 
-.choices-area{
+.quiz-area{
   background-image: url("handmadepaper.png");
   background-blend-mode: multiply;
   box-shadow: 1px 1px 5px 1px #89bcc5 inset;
-  background-color: #cde9ee;
+  background-color: $cLightMain;
   border-radius: 10px;
+}
+.yusei-magic{
+  font-family: 'Yusei Magic', sans-serif;
+  // font-color: $cLightMain;
 }
