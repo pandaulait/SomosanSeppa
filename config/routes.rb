@@ -23,13 +23,14 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :users, only: [:show, :edit, :update]
     resources :quizzes do
+      resources :results, only: [:create, :index]
       resources :choices, only: [:new, :destroy, :create]
     end
-    
+
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   end
-  
+
   namespace :admin do
     resources :quizzes
     resources :categories, only: [:index, :create, :destroy]

@@ -14,25 +14,65 @@
  *= require_self
  */
 @import "bootstrap";
-$cMain: #8ecdd8;
-$cLightMain: #cde9ee;
+
+// $cMain: #8ecdd8;
+$cMain: #4FA5B5;
+$cLightMain: #EDEFF2;
+$cWhite: #FFFFFF;
+$cDarkMain: #2c5c66;
+
+.nav-somosan{
+  background-image: url("handmadepaper.png");
+  background-blend-mode: multiply;
+  background-color: $cMain;
+}
+.background{
+  background-image: url("handmadepaper.png");
+  background-blend-mode: multiply;
+  background-color: #EDEFF2;
+  // margin: 0 20px;
+}
 
 
-
-body {
+.body-type-1 {
   background-image: url("handmadepaper.png");
   background-blend-mode: multiply;
   background-color: $cMain;
 }
 
-.quiz-area{
-  background-image: url("handmadepaper.png");
-  background-blend-mode: multiply;
-  box-shadow: 1px 1px 5px 1px #89bcc5 inset;
-  background-color: $cLightMain;
-  border-radius: 10px;
+.quiz{
+  &-area{
+    // background-image: url("handmadepaper.png");
+    // background-blend-mode: multiply;
+    // box-shadow: 1px 1px 5px 1px #a0a0a0 inset;
+    // background-color: $cLightMain;
+    // border-radius: 10px;
+  }
+  &-background{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cLightMain;
+    box-shadow: 1px 1px 5px 1px #a0a0a0 inset;
+  }
 }
 .yusei-magic{
   font-family: 'Yusei Magic', sans-serif;
   // font-color: $cLightMain;
+}
+
+
+// 外枠とコンテンツのセンター寄り
+.main-content-box{
+  background-image: url("handmadepaper.png");
+  background-blend-mode: multiply;
+  background-color: $cLightMain;
+  min-height: 100vH;
+  margin: 0 10px;
+  padding: 1rem;
+}
+
+.main-content-background{
+  max-width: 600px;
+  min-height: 100vH;
+  margin: 0 auto;
 }

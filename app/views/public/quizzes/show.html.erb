@@ -1,12 +1,23 @@
-<h1>Public::Quizzes#show</h1>
-<p>Find me in app/views/public/quizzes/show.html.erb</p>
+<h4 class="yusei-magic pl-3 pt-3 mx-auto">問題</h4>
+<div class="quiz-content">
+  <%= @quiz.content %><br/>
+</div>
 
-<%= @quiz.content %><br/>
-<%= @quiz.explanation %><br/>
+
 <%= @quiz.user.name %><br/>
-senntakusi
-<% @choices.each do |choice| %>
-  <%= choice.content %><br/>
+<h4 class="yusei-magic pl-3 pt-3 mx-auto">選択肢</h4>(模範回答は1つ以上)
+<%= form_with url: quiz_results_path(@quiz), local: true do |f| %>
+  <% @choices.each do |choice| %>
+    <div class="quiz-choice">
+      <%= f.check_box :answer ,{multiple: true, class: "mx-2 my-auto"} %>
+      <%= choice.content %>
+    </div>
+  <% end %>
+  <%= f.submit '回答する', class: "btn btn-light" %>
 <% end %>
 
-<%= link_to '編集', edit_quiz_path(@quiz) %>
+
+<% if current_user.id == @quiz.user.id %>
+  <%= link_to '編集', edit_quiz_path(@quiz) %>
+<% end %>
+
