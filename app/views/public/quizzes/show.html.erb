@@ -3,10 +3,9 @@
   <%= @quiz.content %><br/>
 </div>
 
-
 <%= @quiz.user.name %><br/>
 <h4 class="yusei-magic pl-3 pt-3 mx-auto">選択肢</h4>(模範回答は1つ以上)
-<%= form_with url: quiz_results_path(@quiz), local: true do |f| %>
+<%= form_with model: @result, url: quiz_results_path(@quiz), local: true do |f| %>
   <% @choices.each do |choice| %>
     <div class="quiz-choice">
       <%= f.check_box :answer ,{multiple: true, class: "mx-2 my-auto"} %>
@@ -14,8 +13,11 @@
     </div>
   <% end %>
   <%= f.submit '回答する', class: "btn btn-light" %>
+  <%= render 'layouts/error_messages', obj: @result, column: :content %>
+  <%= render 'layouts/error_messages', obj: @result, column: :user_id %>
+  <%= render 'layouts/error_messages', obj: @result, column: :quiz_id %>
+  <%= render 'layouts/error_messages', obj: @result, column: :correct_count %>
 <% end %>
-
 
 <% if current_user.id == @quiz.user.id %>
   <%= link_to '編集', edit_quiz_path(@quiz) %>

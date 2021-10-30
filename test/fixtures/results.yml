@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: one
+  quiz_id: one
+  choices_count: 1
+  results_count: 1
+
+two:
+  user_id: two
+  quiz_id: two
+  choices_count: 1
+  results_count: 1

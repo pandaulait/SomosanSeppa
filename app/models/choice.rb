@@ -1,22 +1,29 @@
+# is_answersの正気化
+def normalize(array)
+  flag = 0
+  i = 0
+  true_count = 0
+  while flag == 0
+    if i <=  (array.count - 2)
+      if array[i] == "0" && array[i+1] == "1"
+        array.delete_at(i)
+        true_count += 1
+      end
+      i += 1
+    else
+      flag = 1
+    end
+  end
+  array.push(true_count)
+  return array
+end
+  
+
 class Choice < ApplicationRecord
   validates :content, presence: true, length: { maximum: 100 }
   belongs_to :quiz
   def self.choice_update(choices, quiz_id, is_answers, choice_ids)
-    # @is_answer を正規化
-    flag = 0
-    i = 0
-    true_count = 0
-    while flag == 0
-      if i <=  (is_answers.count - 2)
-        if is_answers[i] == "0" && is_answers[i+1] == "1"
-          is_answers.delete_at(i)
-          true_count += 1
-        end
-        i += 1
-      else
-        flag = 1
-      end
-    end
+    normalize(is_answers)
     # Choiceのcontentが""出ない場合、is_answerと合わせて保存する。
     all_valid = true
     Choice.transaction(joinable: false, requires_new: true) do
@@ -32,7 +39,7 @@ class Choice < ApplicationRecord
         end
       end
       # 回答がない場合、やり直し
-      if true_count < 1
+      if is_answers[-1] < 1
         all_valid = false
         Quiz.find(quiz_id).errors.add(:base, '正解はひとつ以上設定してください。')
       end
@@ -46,20 +53,7 @@ class Choice < ApplicationRecord
 
   def self.choice_create(choices, quiz_id, is_answers)
     # @is_answer を正規化
-    flag = 0
-    i = 0
-    true_count = 0
-    while flag == 0
-      if i <=  (is_answers.count - 2)
-        if is_answers[i] == "0" && is_answers[i+1] == "1"
-          is_answers.delete_at(i)
-          true_count += 1
-        end
-        i += 1
-      else
-        flag = 1
-      end
-    end
+    normalize(is_answers)
     # Choiceのcontentが""出ない場合、is_answerと合わせて保存する。
     all_valid = true
     Choice.transaction(joinable: false, requires_new: true) do
@@ -72,7 +66,7 @@ class Choice < ApplicationRecord
         i+=1
       end
       # 回答がない場合、やり直し
-      if true_count < 1
+      if is_answers[-1] < 1
         all_valid = false
         Quiz.find(quiz_id).errors.add(:base, '正解はひとつ以上設定してください。')
       end
