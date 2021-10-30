@@ -6,6 +6,9 @@ $cLightMain: #EDEFF2;
 $cWhite: #FFFFFF;
 $cDarkMain: #2c5c66;
 
+$cAnswer: #F8D9F2;
+$cLightAnswer: #f0dce3;
+
 
 .quiz{
   &-content-textarea{
@@ -24,5 +27,13 @@ $cDarkMain: #2c5c66;
     padding: 0.5rem;
     margin: 0.5rem;
     border-radius: 4px;
+    &-true{
+      background: $cLightAnswer;
+    }
+  }
+  &-explanation{
+    background: $cLightAnswer;
+    padding: 1rem;
+    border-radius: 7px;
   }
 }

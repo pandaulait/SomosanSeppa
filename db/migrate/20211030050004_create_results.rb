@@ -4,6 +4,7 @@ class CreateResults < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true, null: false
       t.references :quiz, foreign_key: true, null: false
       t.integer :correct_count, null: false
+      t.string :answer, null: false
       t.boolean :content, null: false
 
       t.timestamps

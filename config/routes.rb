@@ -4,9 +4,6 @@ Rails.application.routes.draw do
 
 
 
-  namespace :public do
-    get 'results/index'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions:      'public/devise/sessions',
@@ -24,9 +21,12 @@ Rails.application.routes.draw do
   # }
 
   scope module: :public do
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      resources :results, only: [:index]
+    end
     resources :quizzes do
-      resources :results, only: [:create, :index]
+      resources :results, only: [:create, :show]
+      # get '/answer' => 'results#answer', as: 'answer'
       resources :choices, only: [:new, :destroy, :create]
     end
 

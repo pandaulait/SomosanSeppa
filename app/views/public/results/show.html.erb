@@ -1,0 +1,21 @@
+<%if @result.content %>
+  <span class="yusei-magic">正解です！！！</span>
+<% else %>
+  <span class="yusei-magic">不正解です！！！</span>
+<% end %>
+<h4 class="yusei-magic pl-3 pt-3 mx-auto">問題</h4>
+<div class="quiz-content mb-3">
+  <%= @quiz.content %><br/>
+</div>
+<% i = 0 %>
+<% @quiz.choices.each do |choice| %>
+  <div class="quiz-choice quiz-choice-<%= choice.is_answer%>">
+    <%= check_box :answer, :aa ,{checked: @result.to_answer_array(i), class: "mx-2 my-auto", disabled: true} %>
+    <%= choice.content %>
+    <% i += 1 %>
+  </div>
+<% end %>
+<h4 class="yusei-magic pl-3 pt-3 mx-auto">解説</h4>
+<div class="quiz-explanation">
+  <%= @quiz.explanation %>  
+</div>

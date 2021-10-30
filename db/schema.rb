@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_050004) do
     t.integer "user_id", null: false
     t.integer "quiz_id", null: false
     t.integer "correct_count", null: false
+    t.string "answer", null: false
     t.boolean "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

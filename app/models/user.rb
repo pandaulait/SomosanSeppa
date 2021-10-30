@@ -9,9 +9,11 @@ class User < ApplicationRecord
   has_many :results, dependent: :destroy
   
   
-  
-  
-  
+  # そのクイズを答えたことがあるか
+  def answered?(quiz)
+    results.where(quiz_id: quiz.id).present?
+  end
+  # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
