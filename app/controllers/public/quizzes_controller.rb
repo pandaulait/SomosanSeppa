@@ -2,6 +2,7 @@ class Public::QuizzesController < ApplicationController
   def show
     @quiz = Quiz.find(params[:id])
     @choices = @quiz.choices
+    @result = Result.new
   end
 
   def new
@@ -18,8 +19,8 @@ class Public::QuizzesController < ApplicationController
         if Choice.choice_create(@choices, @quiz.id, @is_answers)
           redirect_to quiz_path(@quiz)
         else
-          raise ActiveRecord::Rollback
           render :new
+          raise ActiveRecord::Rollback
         end
       else
         render :new

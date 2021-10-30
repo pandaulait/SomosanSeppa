@@ -14,25 +14,101 @@
  *= require_self
  */
 @import "bootstrap";
-$cMain: #8ecdd8;
-$cLightMain: #cde9ee;
+
+// $cMain: #8ecdd8;
+$cMain: #4FA5B5;
+$cLightMain: #EDEFF2;
+$cWhite: #FFFFFF;
+$cDarkMain: #2c5c66;
+$cBlueBackground: #EDEFF2;
+$cAnswer: #b54f75;
+$cLightAnswer: #f0dce3;
 
 
-
-body {
+.nav-somosan{
   background-image: url("handmadepaper.png");
   background-blend-mode: multiply;
   background-color: $cMain;
 }
-
-.quiz-area{
+.background{
   background-image: url("handmadepaper.png");
   background-blend-mode: multiply;
-  box-shadow: 1px 1px 5px 1px #89bcc5 inset;
-  background-color: $cLightMain;
-  border-radius: 10px;
+  background-color: $cBlueBackground;
+  // margin: 0 20px;
+}
+
+
+.body-type{
+  &-1{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cMain;
+  }
+  &-2{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cAnswer;
+  }
+}
+
+.quiz{
+  &-area{
+    // background-image: url("handmadepaper.png");
+    // background-blend-mode: multiply;
+    // box-shadow: 1px 1px 5px 1px #a0a0a0 inset;
+    // background-color: $cLightMain;
+    // border-radius: 10px;
+  }
+  &-background{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cLightMain;
+    box-shadow: 1px 1px 5px 1px #a0a0a0 inset;
+  }
 }
 .yusei-magic{
   font-family: 'Yusei Magic', sans-serif;
   // font-color: $cLightMain;
 }
+
+
+// 外枠とコンテンツのセンター寄り
+.main-content-box{
+  &-1{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cLightMain;
+    min-height: 100vH;
+    margin: 0 10px;
+    padding: 1rem;
+  }
+  &-2{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cWhite;
+    min-height: 100vH;
+    margin: 0 10px;
+    padding: 1rem;
+  }
+}
+
+.main-content-background{
+  max-width: 600px;
+  min-height: 100vH;
+  margin: 0 auto;
+}
+// input[type=checkbox]:checked:disabled{
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+//   &::after{
+//     font-size: 20px;
+//     background-color: red;
+//     margin: 2px auto;
+//     display: inline-block;
+//     width: 20px;
+//     height: 20px;
+//     content: '✓';
+//     text-align: center;
+//   }
+// }

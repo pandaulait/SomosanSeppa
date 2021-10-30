@@ -21,15 +21,19 @@ Rails.application.routes.draw do
   # }
 
   scope module: :public do
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      resources :results, only: [:index]
+    end
     resources :quizzes do
+      resources :results, only: [:create, :show]
+      # get '/answer' => 'results#answer', as: 'answer'
       resources :choices, only: [:new, :destroy, :create]
     end
-    
+
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   end
-  
+
   namespace :admin do
     resources :quizzes
     resources :categories, only: [:index, :create, :destroy]

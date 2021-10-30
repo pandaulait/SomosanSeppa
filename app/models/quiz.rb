@@ -4,4 +4,10 @@ class Quiz < ApplicationRecord
 
   belongs_to :user
   has_many :choices, dependent: :destroy
+  has_many :results, dependent: :destroy
+  
+  # クイズが解かれた回数
+  def solved_times
+    results.count
+  end
 end

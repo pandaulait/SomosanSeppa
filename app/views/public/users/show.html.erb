@@ -10,9 +10,9 @@
   <tbody>
     <td>
       <% if @user.profile_image.attached? %>
-        <%= image_tag @user.profile_image %>
+        <%= image_tag @user.profile_image, class: "user_page__profile_image"%>
       <% else %>
-       <%= image_tag 'no_image.jpg' %>
+       <%= image_tag 'no_image.jpg', class: "user_page__profile_image" %>
       <% end %>
     </td>
     <td><%= @user.name %>さん</td>
@@ -28,5 +28,6 @@
 </table>
 <% if @user.id == current_user.id %>
   <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <p><%= link_to "結界一覧", user_results_path(@user) %></p>
 <% end %>
 

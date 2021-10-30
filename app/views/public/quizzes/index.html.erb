@@ -3,25 +3,24 @@
 
 
 
-  <table class="table">
-    <thead>
-      <th>ID</th>
-      <th>作者</th>
-      <th>問題文</th>
-      <th>説明</th>
-    </thead>
-    <tbody>
-      <% @quizzes.each do |quiz| %>
-        
-          <tr>
-            <td><%= link_to quiz_path(quiz) do %><%= quiz.id %><% end %></td>
-            <td><%= quiz.user.name %></td>
-            <td><%= quiz.content %></td>
-            <td><%= quiz.explanation %></td>
-          </tr>
-        
-      <% end %>
-    </tbody>
-
-  </table>
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>作者</th>
+    <th>問題文</th>
+    <th>説明</th>
+  </thead>
+  <tbody>
+    <% @quizzes.each do |quiz| %>
+      <tr>
+        <td><%= link_to quiz_path(quiz) do %><%= quiz.id %><% end %></td>
+        <td><%= quiz.user.name %></td>
+        <td><%= quiz.content %></td>
+        <td><%= quiz.explanation %></td>
+        <td><%= current_user.answered?(quiz) %></td>
+        <td><%= quiz.solved_times %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
