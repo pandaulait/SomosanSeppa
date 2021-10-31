@@ -1,4 +1,6 @@
 class Admin::QuizzesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_user
   layout 'admin'
   def index
     @quizzes = Quiz.all
@@ -18,10 +20,14 @@ class Admin::QuizzesController < ApplicationController
   def show
     @quiz = Quiz.find(params[:id])
   end
-  
-  
+
+
   private
   def quiz_params
     params.require(:quiz).permit(:status)
+  end
+
+  def admin_user
+    redirect_to root_path unless current_user.admin?
   end
 end

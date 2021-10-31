@@ -20,6 +20,15 @@
         <li class="nav-item">
           <%= link_to 'クイズ一覧', quizzes_path, class: "nav-link active" %>
         </li>
+        <% if current_user.admin? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理者ページ</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to 'ユーザー管理', admin_users_path , class: "dropdown-item"%>
+              <%= link_to 'クイズ管理', admin_quizzes_path , class: "dropdown-item"%>
+            </div>
+          </li>
+        <% end %>
       <% else %>
         <li class="nav-item">
           <%= link_to "新規登録", new_user_registration_path, class: "nav-link active" %>
@@ -29,15 +38,6 @@
         </li>
         <li class="nav-item">
           <%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post , class: "nav-link active"%>
-        </li>
-      <% end %>
-      <% if current_user.admin? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理者ページ</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <%= link_to 'ユーザー管理', admin_users_path , class: "dropdown-item"%>
-            <%= link_to 'クイズ管理', admin_quizzes_path , class: "dropdown-item"%>
-          </div>
         </li>
       <% end %>
     </ul>

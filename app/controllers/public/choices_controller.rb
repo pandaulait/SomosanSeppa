@@ -1,4 +1,7 @@
 class Public::ChoicesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user
+  
   def destroy
     choice = Choice.find(params[:id])
     choice.destroy
@@ -17,13 +20,19 @@ class Public::ChoicesController < ApplicationController
     if @choice.save
       redirect_to edit_quiz_path(@quiz)
     end
-    
-    # byebug
   end
   
   
   private
   def choice_params
     params.require(:choice).permit(:quiz_id, :content, :is_answer)
+  end
+  
+  def ensure_correct_user
+    user = Quiz.find(params[:id]).user
+    return if (user == current_user || current_user.admin?)
+    
+    flash[:alert] = '他人のコラムは編集できません。'
+    redirect_to request.referer
   end
 end
