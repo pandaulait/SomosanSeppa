@@ -1,6 +1,8 @@
-
+<%= render 'layouts/flash' %>
 <nav class="navbar navbar-light">
-  <a class="navbar-brand" href="#">Never expand</a>
+  <%= link_to root_path do %>
+    <%= image_tag 'somosan0.png', class: "nav-icon-image" %>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

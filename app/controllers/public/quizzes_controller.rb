@@ -1,10 +1,16 @@
 class Public::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
+
   def show
     @quiz = Quiz.find(params[:id])
     @choices = @quiz.choices
     @result = Result.new
+  end
+
+
+  def index
+    @quizzes = Quiz.all.published
   end
 
   def new
@@ -25,6 +31,7 @@ class Public::QuizzesController < ApplicationController
             redirect_to quiz_path(@quiz)
           end
         else
+          flash.now[:alert] ="更新に失敗しました。"
           render :new
           raise ActiveRecord::Rollback
         end
@@ -54,18 +61,24 @@ class Public::QuizzesController < ApplicationController
           redirect_to quiz_path(@quiz)
         end
       else
+        if @alert.present?
+          flash[:alert] = @alert
+        end
+        flash.now[:alert] ="更新に失敗しました。"
         render :edit
       end
     else
       render :edit
     end
-
   end
 
-  def index
-    @quizzes = Quiz.all
+
+  def random_select
   end
 
+  def seppa
+    @quiz = Quiz.randomly_selected(current_user)
+  end
 
   private
 

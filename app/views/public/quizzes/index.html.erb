@@ -1,19 +1,25 @@
 <table class="table">
   <thead>
-    <th>ID</th>
-    <th>作者</th>
     <th>問題文</th>
-    <th>説明</th>
+    <th>作者</th>
+    <th>解かれた回数</th>
+
   </thead>
   <tbody>
     <% @quizzes.each do |quiz| %>
       <tr>
-        <td><%= link_to quiz_path(quiz) do %><%= quiz.id %><% end %></td>
-        <td><%= quiz.user.name %></td>
-        <td><%= quiz.content %></td>
-        <td><%= quiz.explanation %></td>
-        <td><%= current_user.answered?(quiz) %></td>
-        <td><%= quiz.solved_times %></td>
+        <td><%= link_to quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %></td>
+        <td><%= render 'public/users/quiz_author_icon', quiz: quiz %> <%= quiz.user.name %></td>
+
+        <td>
+          <%= quiz.solved_times %>回(
+          <% if current_user.answered?(quiz) %>
+            <%= quiz.solved_times_by(current_user) %>回
+          <% else %>
+            未
+          <% end %>)
+        </td>
+        <td><%= quiz.status %></td>
       </tr>
     <% end %>
   </tbody>

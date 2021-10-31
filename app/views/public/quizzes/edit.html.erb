@@ -1,8 +1,15 @@
 <%= form_with model: @quiz, url: quiz_path(@quiz), local: true do |f| %>
-  <h4 class="yusei-magic pl-3 pt-3">問題文</h4>
-  <%= f.text_area :content, class: "form-control quiz-content-textarea" %>
+<!--問題文の編集area-->
+  <span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
+  <span class="yusei-magic">(作:</span>
+  <%= render 'public/users/quiz_author_icon' ,quiz: @quiz %>
+  <span class="yusei-magic"><%= @quiz.user.name %> さん)</span>
+
+  <%= f.text_area :content, class: "form-control quiz-content-textarea mt-2" %>
   <%= render 'layouts/error_messages', obj: @quiz, column: :content %>
-  <h4 class="yusei-magic pl-3 pt-3">選択肢</h4>
+<!--選択肢の編集エリア-->
+  <span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
+  <span class="yusei-magic">(模範回答は1つ以上)</span>
   <% @choices.each do |choice| %>
     <%= f.fields_for choice do |i| %>
       <div class="d-flex choice_input">
@@ -10,16 +17,17 @@
         <%= i.check_box :is_answer ,{multiple: true, class: "mx-2 my-auto"} %>
         <%= i.text_field :content, name: "quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
         <% if @quiz.user == current_user %>
-          <%= link_to "×", quiz_choice_path(@quiz, choice), method: :delete %>
+          <%= link_to "×", quiz_choice_path(@quiz, choice), method: :delete, class: "sbtn btn-light px-3 m-1"%>
         <% end %>
       </div>
     <% end %>
   <% end %>
   <%= link_to '選択肢を追加', new_quiz_choice_path(@quiz), class: "btn btn-light", remote: true %>
+<!--解説の編集エリア-->
   <h4 class="yusei-magic pl-3 pt-3">解説</h4>
   <%= f.text_area :explanation, class: "form-control quiz-explaination-textarea" %>
   <%= render 'layouts/error_messages', obj: @quiz, column: :explanation%>
-  <%= f.submit '保存', class: "btn btn-light" %>
+  <%= f.submit '保存', class: "ml-auto mr-2 mbtn btn-1" %>
 <% end %>
 <div id="output"></div>
 

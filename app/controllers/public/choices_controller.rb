@@ -1,18 +1,22 @@
 class Public::ChoicesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user
-  
+
   def destroy
     choice = Choice.find(params[:id])
-    choice.destroy
+    if Quiz.find(params[:quiz_id]).choices.count > 2
+      choice.destroy
+    else
+      flash[:alert] = "選択肢は2つ以上にしてください"
+    end
     redirect_to edit_quiz_path(Quiz.find(params[:quiz_id]))
   end
-  
+
   def new
     @quiz = Quiz.find(params[:quiz_id])
     @choice = @quiz.choices.new
   end
-  
+
   def create
     @quiz = Quiz.find(params[:quiz_id])
     @choice = Choice.new(choice_params)
@@ -21,18 +25,18 @@ class Public::ChoicesController < ApplicationController
       redirect_to edit_quiz_path(@quiz)
     end
   end
-  
-  
+
+
   private
   def choice_params
     params.require(:choice).permit(:quiz_id, :content, :is_answer)
   end
-  
+
   def ensure_correct_user
-    user = Quiz.find(params[:id]).user
+    user = Quiz.find(params[:quiz_id]).user
     return if (user == current_user || current_user.admin?)
-    
-    flash[:alert] = '他人のコラムは編集できません。'
+
+    flash[:alert] = '他人のクイズは編集できません。'
     redirect_to request.referer
   end
 end

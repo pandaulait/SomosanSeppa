@@ -27,10 +27,16 @@ $cAdmin: #837bad;
 // $cAdmin
 
 
-.nav-somosan{
-  background-image: url("handmadepaper.png");
-  background-blend-mode: multiply;
-  background-color: $cMain;
+.nav{
+  &-somosan{
+    background-image: url("handmadepaper.png");
+    background-blend-mode: multiply;
+    background-color: $cMain;
+  }
+ &-icon-image{
+   height: 50px;
+   margin: 0 auto;
+ }
 }
 .background{
   background-image: url("handmadepaper.png");
@@ -38,6 +44,7 @@ $cAdmin: #837bad;
   background-color: $cBlueBackground;
   // margin: 0 20px;
 }
+
 
 
 .body-type{
@@ -76,6 +83,10 @@ $cAdmin: #837bad;
 .yusei-magic{
   font-family: 'Yusei Magic', sans-serif;
   // font-color: $cLightMain;
+  &-l{
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 1.3rem;
+  }
 }
 
 
@@ -104,18 +115,68 @@ $cAdmin: #837bad;
   min-height: 100vH;
   margin: 0 auto;
 }
-// input[type=checkbox]:checked:disabled{
-//   -webkit-appearance: none;
-//   -moz-appearance: none;
-//   appearance: none;
-//   &::after{
-//     font-size: 20px;
-//     background-color: red;
-//     margin: 2px auto;
-//     display: inline-block;
-//     width: 20px;
-//     height: 20px;
-//     content: '✓';
-//     text-align: center;
-//   }
-// }
+
+
+.sbtn{
+  margin: 0.4rem 0.5rem;
+  display: block;
+  background-color: white;
+  text-align: center;
+  padding: 3px 5px;
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+  &:hover{
+    text-decoration: none;
+  }
+}
+.mbtn{
+  margin: 0.4rem 0.5rem;
+  display: block;
+  background-color: white;
+  text-align: center;
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 1rem;
+  &:hover{
+    text-decoration: none;
+  }
+}
+.lbtn{
+  margin: 0.4rem 0.5rem;
+  display: block;
+  background-color: white;
+  text-align: center;
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 1.1rem;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+.btn{
+  &-1{
+    color: $cWhite;
+    border: solid 1px $cMain;
+    background-color: $cMain;
+    &:hover{
+      color: $cMain;
+      background-color: $cLightMain;
+    }
+  }
+  &-2{
+    color: $cWhite;
+    border: solid 1px $cAnswer;
+    background-color: $cAnswer;
+    &:hover{
+      color: $cAnswer;
+      background-color: $cLightAnswer;
+    }
+  }
+}

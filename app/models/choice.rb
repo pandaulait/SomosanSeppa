@@ -17,7 +17,7 @@ def normalize(array)
   array.push(true_count)
   return array
 end
-  
+
 
 class Choice < ApplicationRecord
   validates :content, presence: true, length: { maximum: 100 }
@@ -41,7 +41,6 @@ class Choice < ApplicationRecord
       # 回答がない場合、やり直し
       if is_answers[-1] < 1
         all_valid = false
-        Quiz.find(quiz_id).errors.add(:base, '正解はひとつ以上設定してください。')
       end
       unless all_valid
         raise ActiveRecord::Rollback
@@ -70,7 +69,7 @@ class Choice < ApplicationRecord
         all_valid = false
         Quiz.find(quiz_id).errors.add(:base, '正解はひとつ以上設定してください。')
       end
-      
+
       unless all_valid
         raise ActiveRecord::Rollback
       end

@@ -1,10 +1,15 @@
-<h4 class="yusei-magic pl-3 pt-3 mx-auto">問題</h4>
-<div class="quiz-content">
+<span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
+<span class="yusei-magic">(作:</span>
+<%= render 'public/users/quiz_author_icon' ,quiz: @quiz %>
+<span class="yusei-magic"><%= @quiz.user.name %> さん<%= ', 管理者認証済' if @quiz.authenticated? %>)</span>
+
+<div class="quiz-content mt-2">
   <%= @quiz.content %><br/>
 </div>
 
-<%= @quiz.user.name %><br/>
-<h4 class="yusei-magic pl-3 pt-3 mx-auto">選択肢</h4>(模範回答は1つ以上)
+
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
+<span class="yusei-magic">(模範回答は1つ以上)</span>
 <%= form_with model: @result, url: quiz_results_path(@quiz), local: true do |f| %>
   <% @choices.each do |choice| %>
     <div class="quiz-choice">
@@ -12,7 +17,7 @@
       <%= choice.content %>
     </div>
   <% end %>
-  <%= f.submit '回答する', class: "btn btn-light" %>
+  <%= f.submit '回答する', class: "mr-2 ml-auto mbtn btn-1" %>
   <%= render 'layouts/error_messages', obj: @result, column: :content %>
   <%= render 'layouts/error_messages', obj: @result, column: :user_id %>
   <%= render 'layouts/error_messages', obj: @result, column: :quiz_id %>
