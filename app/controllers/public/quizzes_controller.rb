@@ -10,7 +10,7 @@ class Public::QuizzesController < ApplicationController
 
 
   def index
-    @quizzes = Quiz.all
+    @quizzes = Quiz.all.published
   end
 
   def new
@@ -31,6 +31,7 @@ class Public::QuizzesController < ApplicationController
             redirect_to quiz_path(@quiz)
           end
         else
+          flash.now[:alert] ="更新に失敗しました。"
           render :new
           raise ActiveRecord::Rollback
         end
@@ -60,8 +61,11 @@ class Public::QuizzesController < ApplicationController
           redirect_to quiz_path(@quiz)
         end
       else
+        if @alert.present?
+          flash[:alert] = @alert
+        end
+        flash.now[:alert] ="更新に失敗しました。"
         render :edit
-        raise ActiveRecord::Rollback
       end
     else
       render :edit

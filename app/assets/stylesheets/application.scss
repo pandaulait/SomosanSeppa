@@ -83,6 +83,10 @@ $cAdmin: #837bad;
 .yusei-magic{
   font-family: 'Yusei Magic', sans-serif;
   // font-color: $cLightMain;
+  &-l{
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 1.3rem;
+  }
 }
 
 
@@ -132,7 +136,7 @@ $cAdmin: #837bad;
   display: block;
   background-color: white;
   text-align: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 2rem;
   text-decoration: none;
   transition: all 0.3s;

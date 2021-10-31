@@ -17,12 +17,12 @@
   </head>
 
   <body class="body-type-1">
-    <%= render 'layouts/flash' %>
-      <div class="main-content-background">
-        <div class="main-content-box-1">
-          <%= render 'layouts/header' %>
-          <%= yield %>
-        </div>
+    <div class="main-content-background">
+      <div class="main-content-box-1">
+        <%= render 'layouts/header' %>
+        
+        <%= yield %>
       </div>
+    </div>
   </body>
 </html>

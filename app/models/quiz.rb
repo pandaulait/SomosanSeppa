@@ -19,10 +19,10 @@ class Quiz < ApplicationRecord
   # ユーザーの最近解いてないクイズを1問用意する
   def self.randomly_selected(user)
     len = 5
-    if Quiz.all.size < len
-      len = Quiz.all.size
+    if Quiz.all.published.size < len
+      len = Quiz.all.published.size
     end
-    quizzes_number = Quiz.all.map.with_index{|q,i| [i+1, q.solved_times_by(user)]}
+    quizzes_number = Quiz.all.published.map.with_index{|q,i| [i+1, q.solved_times_by(user)]}
     quiz_number =  quizzes_number.sort {|a,b| a[1] <=> b[1]}[0.. len].sample[0]
     find(quiz_number)
   end
