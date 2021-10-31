@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_050004) do
+ActiveRecord::Schema.define(version: 2021_10_31_043239) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,12 +61,22 @@ ActiveRecord::Schema.define(version: 2021_10_30_050004) do
     t.integer "user_id", null: false
     t.integer "quiz_id", null: false
     t.integer "correct_count", null: false
-    t.string "answer", null: false
+    t.string "statanswer", null: false
     t.boolean "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_results_on_quiz_id"
     t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
+  create_table "today_quizzes", force: :cascade do |t|
+    t.date "content", null: false
+    t.integer "quiz_id_id", null: false
+    t.integer "challenger", default: 0, null: false
+    t.integer "correct_answerer", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id_id"], name: "index_today_quizzes_on_quiz_id_id"
   end
 
   create_table "users", force: :cascade do |t|

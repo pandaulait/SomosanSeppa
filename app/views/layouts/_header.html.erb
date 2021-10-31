@@ -31,14 +31,15 @@
           <%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post , class: "nav-link active"%>
         </li>
       <% end %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+      <% if current_user.admin? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理者ページ</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <%= link_to 'ユーザー管理', admin_users_path , class: "dropdown-item"%>
+            <%= link_to 'クイズ管理', admin_quizzes_path , class: "dropdown-item"%>
+          </div>
+        </li>
+      <% end %>
     </ul>
     <form class="form-inline my-2 my-md-0">
       <input class="form-control" type="text" placeholder="Search" aria-label="Search">

@@ -1,2 +1,23 @@
 <h1>Admin::Quizzes#index</h1>
 <p>Find me in app/views/admin/quizzes/index.html.erb</p>
+
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>作者</th>
+    <th>問題文</th>
+    <th>回数</th>
+    <th>ステータス</th>
+  </thead>
+  <tbody>
+    <% @quizzes.each do |quiz| %>
+      <tr>
+        <td><%= link_to admin_quiz_path(quiz) do %><%= quiz.id %><% end %></td>
+        <td><%= quiz.user.name %></td>
+        <td><%= quiz.content %></td>
+        <td><%= quiz.solved_times %></td>
+        <td><%= quiz.status%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
