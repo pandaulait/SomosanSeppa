@@ -12,4 +12,6 @@ class Quiz < ApplicationRecord
   def solved_times
     results.count
   end
+  # 有効={未認証, 認証済み}スコープ
+  scope :published, -> { where(status: 0..1) }
 end
