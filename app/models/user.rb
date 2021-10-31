@@ -3,12 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_one_attached :profile_image
   has_many :quizzes, dependent: :destroy
   has_many :results, dependent: :destroy
-  
-  
+
+
   # そのクイズを答えたことがあるか
   def answered?(quiz)
     results.where(quiz_id: quiz.id).present?
@@ -21,4 +21,5 @@ class User < ApplicationRecord
       # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
     end
   end
+
 end

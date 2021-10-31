@@ -1,4 +1,6 @@
 class Public::QuizzesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update]
   def show
     @quiz = Quiz.find(params[:id])
     @choices = @quiz.choices
@@ -17,7 +19,11 @@ class Public::QuizzesController < ApplicationController
         @choices = params[:quiz][:choices]
         @is_answers = params[:choice][:is_answer]
         if Choice.choice_create(@choices, @quiz.id, @is_answers)
-          redirect_to quiz_path(@quiz)
+          if current_user.admin?
+            redirect_to admin_quiz_path(@quiz)
+          else
+            redirect_to quiz_path(@quiz)
+          end
         else
           render :new
           raise ActiveRecord::Rollback
@@ -42,7 +48,11 @@ class Public::QuizzesController < ApplicationController
       @choice_ids = params[:quiz][:choice_id]
       # byebug
       if Choice.choice_update(choices, @quiz.id, @is_answers, @choice_ids)
-        redirect_to quiz_path(@quiz)
+        if current_user.admin?
+          redirect_to admin_quiz_path(@quiz)
+        else
+          redirect_to quiz_path(@quiz)
+        end
       else
         render :edit
       end
@@ -61,6 +71,13 @@ class Public::QuizzesController < ApplicationController
 
   def quiz_params
     params.require(:quiz).permit(:content, :explanation)
+  end
+  def ensure_correct_user
+    user = Quiz.find(params[:id]).user
+    return if (user == current_user || current_user.admin?)
+
+    flash[:alert] = '他人のコラムは編集できません。'
+    redirect_to request.referer
   end
   # def quiz_params
   #   params.require(:quiz).permit(:choice, :explanation)
