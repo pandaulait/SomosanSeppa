@@ -1,3 +1,35 @@
 // Place all the styles related to the public/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.top{
+  &-icon{
+    width: 80%;
+    margin: 0 auto;
+
+    // animation: fadeIn 0.2s ease 1s 1 forwards;
+  }
+  &-box{
+    margin-top: 15vh;
+    width: 100%;
+    display: flex;
+  }
+}
+.fade{
+  opacity: 0;
+  animation: fadeIn 0.5s ease 1s 1 forwards;
+}
+
+.fade2{
+  animation: fadeOut 0.3s ease 1.7s 1 forwards;
+}
+@keyframes fadeIn { /*animation-nameで設定した値を書く*/
+    0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
+    100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
+}
+
+@keyframes fadeOut { /*animation-nameで設定した値を書く*/
+    100% {opacity: 0} /*アニメーション開始時は不透明度100%*/
+    0% {opacity: 1} /*アニメーション終了時は不透明度0%*/
+}

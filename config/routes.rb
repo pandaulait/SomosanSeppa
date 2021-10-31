@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
 
 
-
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions:      'public/devise/sessions',
@@ -24,11 +22,13 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       resources :results, only: [:index]
     end
+    get 'quizzes/random_select', to: 'quizzes#random_select'
     resources :quizzes do
       resources :results, only: [:create, :show]
       # get '/answer' => 'results#answer', as: 'answer'
       resources :choices, only: [:new, :destroy, :create]
     end
+    get '/seppa' => 'quizzes#seppa', as: 'seppa'
 
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'

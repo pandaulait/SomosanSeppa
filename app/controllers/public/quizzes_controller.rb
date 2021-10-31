@@ -1,10 +1,16 @@
 class Public::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
+
   def show
     @quiz = Quiz.find(params[:id])
     @choices = @quiz.choices
     @result = Result.new
+  end
+
+
+  def index
+    @quizzes = Quiz.all
   end
 
   def new
@@ -55,17 +61,20 @@ class Public::QuizzesController < ApplicationController
         end
       else
         render :edit
+        raise ActiveRecord::Rollback
       end
     else
       render :edit
     end
-
   end
 
-  def index
-    @quizzes = Quiz.all
+
+  def random_select
   end
 
+  def seppa
+    @quiz = Quiz.randomly_selected(current_user)
+  end
 
   private
 
