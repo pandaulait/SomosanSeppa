@@ -81,13 +81,15 @@ ActiveRecord::Schema.define(version: 2021_11_01_050952) do
 
   create_table "today_results", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer C2gYLhGAWV7q"quiz_id", null: false
+    t.integer "quiz_id", null: false
+    t.integer "today_quiz_id", null: false
     t.integer "correct_count", null: false
     t.string "answer", null: false
     t.boolean "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_today_results_on_quiz_id"
+    t.index ["today_quiz_id"], name: "index_today_results_on_today_quiz_id"
     t.index ["user_id"], name: "index_today_results_on_user_id"
   end
 
