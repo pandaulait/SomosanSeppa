@@ -21,5 +21,11 @@ class User < ApplicationRecord
       # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
     end
   end
+  # 今日の五問を解き終わったか
+  def finish_today_quizzes?
+    flag = true
+    flag = false if today_status < 5
+    flag
+  end
 
 end

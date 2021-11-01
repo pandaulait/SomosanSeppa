@@ -3,7 +3,7 @@
 <% else %>
   <span class="yusei-magic">不正解です！！！</span>
 <% end %>
-
+</br>
 <span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
 <span class="yusei-magic">(作:</span>
 <%= render 'public/users/quiz_author_icon' ,quiz: @quiz %>
@@ -12,6 +12,8 @@
   <%= @quiz.content %><br/>
 </div>
 <!--回答と解答の表示-->
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
+<span class="yusei-magic">(模範回答は1つ以上)</span>
 <% i = 0 %>
 <% @quiz.choices.each do |choice| %>
   <div class="quiz-choice quiz-choice-<%= choice.is_answer%>">
@@ -20,8 +22,8 @@
     <% i += 1 %>
   </div>
 <% end %>
-<span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
-<span class="yusei-magic">(模範回答は1つ以上)</span>
+<!--解説の表示-->
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">解説</span>
 <div class="quiz-explanation">
   <%= @quiz.explanation %>
 </div>
