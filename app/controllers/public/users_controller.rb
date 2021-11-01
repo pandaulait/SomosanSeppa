@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user
   def show
     @user = User.find(params[:id])
   end
@@ -21,8 +21,8 @@ class Public::UsersController < ApplicationController
     return if user == current_user
 
     flash[:alert] = '他人のコラムは編集できません。'
-    redirect_to request.referer
-    
+    redirect_to root_path
+
   end
   def user_params
     params.require(:user).permit(:name, :profile_image)

@@ -90,7 +90,7 @@ class Public::QuizzesController < ApplicationController
     return if (user == current_user || current_user.admin?)
 
     flash[:alert] = '他人のコラムは編集できません。'
-    redirect_to request.referer
+    redirect_to root_path
   end
   # def quiz_params
   #   params.require(:quiz).permit(:choice, :explanation)

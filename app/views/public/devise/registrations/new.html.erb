@@ -1,34 +1,36 @@
-<h2>Sign up</h2>
-aaa
+<h2 class="yusei-magic">アカウント新規登録</h2>
 <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%#= render "devise/shared/error_messages", resource: resource %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.label :name ,'名前', class: "yusei-magic-l ml-2"%>
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    <%= render 'layouts/error_messages', obj: @user, column: :name %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.label :email ,'メールアドレス', class: "yusei-magic-l ml-2" %>
+    <%= f.email_field :email, autocomplete: "email", class: "form-control"%>
+    <%= render 'layouts/error_messages', obj: @user, column: :email %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password,'パスワード', class: "yusei-magic-l ml-2" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    
+      <span class="yusei-magic-l ml-2">(<%= @minimum_password_length %> 文字以上)</span>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control"%>
+    <%= render 'layouts/error_messages', obj: @user, column: :password %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation,'パスワード確認用', class: "yusei-magic-l ml-2" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"%>
+    <%= render 'layouts/error_messages', obj: @user, column: :password_confirmation %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions d-flex" style="">
+    <%= f.submit "新規登録", class: "mt-5 tsbtn btn-1" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= link_to "ログイン", new_user_session_path, class: "tsbtn btn-4" %>

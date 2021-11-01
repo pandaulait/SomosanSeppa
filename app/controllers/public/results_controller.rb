@@ -66,8 +66,5 @@ class Public::ResultsController < ApplicationController
     array.push(true_count)
     return array
   end
-
-
-
 end
 
