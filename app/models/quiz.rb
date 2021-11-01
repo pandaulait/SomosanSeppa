@@ -13,7 +13,7 @@ class Quiz < ApplicationRecord
   def solved_times
     results.count
   end
-
+  # クイズがユーザーに解かれた回数
   def solved_times_by(user)
     results.where(user_id: user.id).count
   end

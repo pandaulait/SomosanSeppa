@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
 
 
-  namespace :public do
-    get 'today_quizzes/index'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions:      'public/devise/sessions',
@@ -32,7 +29,8 @@ Rails.application.routes.draw do
       resources :choices, only: [:new, :destroy, :create]
     end
     get '/seppa' => 'quizzes#seppa', as: 'seppa'
-
+    resources :today_quizzes, only: [:index]
+    resources :today_results, only: [:create, :index]
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   end

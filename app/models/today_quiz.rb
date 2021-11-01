@@ -1,5 +1,7 @@
 class TodayQuiz < ApplicationRecord
   belongs_to :quiz
+  has_many :today_results
+  
   def self.five_create
     len = 10
     if Quiz.all.authenticated.size < len
@@ -18,5 +20,10 @@ class TodayQuiz < ApplicationRecord
       end
     end
     all_valid
+  end
+
+  def self.five_created?
+    flag = TodayQuiz.where(content: Date.today).present?
+    flag
   end
 end

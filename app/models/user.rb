@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :quizzes, dependent: :destroy
   has_many :results, dependent: :destroy
+  has_many :today_results, dependent: :destroy
 
 
 
@@ -28,5 +29,14 @@ class User < ApplicationRecord
     flag = false if today_status < 5
     flag
   end
-
+  # 今日の五問の正解数
+  def today_quiz_score
+    score = 0
+    @quizzes = TodayQuiz.where(content: Date.today)
+    @quizzes.each do |q|
+      result = q.today_results.find_by(user_id: id)
+      score += 1 if result.content
+    end
+    score
+  end
 end
