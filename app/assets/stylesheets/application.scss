@@ -29,7 +29,7 @@ $cAdmin: #837bad;
 
 .nav{
   &-somosan{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cMain;
   }
@@ -39,7 +39,7 @@ $cAdmin: #837bad;
  }
 }
 .background{
-  background-image: url("handmadepaper.png");
+  background-image: image-url("handmadepaper.png");
   background-blend-mode: multiply;
   background-color: $cBlueBackground;
   // margin: 0 20px;
@@ -49,17 +49,17 @@ $cAdmin: #837bad;
 
 .body-type{
   &-1{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cMain;
   }
   &-2{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cAnswer;
   }
   &-3{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cAdmin;
   }
@@ -74,7 +74,7 @@ $cAdmin: #837bad;
     // border-radius: 10px;
   }
   &-background{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cLightMain;
     box-shadow: 1px 1px 5px 1px #a0a0a0 inset;
@@ -93,7 +93,7 @@ $cAdmin: #837bad;
 // 外枠とコンテンツのセンター寄り
 .main-content-box{
   &-1{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cLightMain;
     min-height: 100vH;
@@ -101,7 +101,7 @@ $cAdmin: #837bad;
     padding: 1rem;
   }
   &-2{
-    background-image: url("handmadepaper.png");
+    background-image: image-url("handmadepaper.png");
     background-blend-mode: multiply;
     background-color: $cWhite;
     min-height: 100vH;
