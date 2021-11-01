@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      quiz: クイズ
+    attributes:
+      quiz:
+        content: 問題文
+        user_id: 作者
+        explanation: 説明
+        status: 認証ステータス
+  enums: 
+    quiz:
+      status: # カラム名
+        unauthenticated: '未認証' # enumの値
+        authenticated: '認証済' # enumの値
+        unpublished: '非公開' # enumの値

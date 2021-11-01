@@ -3,10 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  validates :name,     presence: true, length: { in: 3..200 }
   has_one_attached :profile_image
   has_many :quizzes, dependent: :destroy
   has_many :results, dependent: :destroy
+
 
 
   # そのクイズを答えたことがあるか

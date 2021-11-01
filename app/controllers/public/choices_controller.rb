@@ -37,6 +37,6 @@ class Public::ChoicesController < ApplicationController
     return if (user == current_user || current_user.admin?)
 
     flash[:alert] = '他人のクイズは編集できません。'
-    redirect_to request.referer
+    redirect_to root_path
   end
 end
