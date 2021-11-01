@@ -9,7 +9,7 @@
 
 # 管理者作成
 User.find_or_create_by(email: "admin@example.com") do |user|
-  user.email = "example@example.com"
+  user.email = "admin@example.com"
   user.name = "Example Admin"
   user.password =            "foobar"
   user.password_confirmation = "foobar"

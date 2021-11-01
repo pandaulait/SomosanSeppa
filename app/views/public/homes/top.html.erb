@@ -3,4 +3,10 @@
 </div>
 
 <%= link_to 'とりあえず一問！' ,quizzes_random_select_path , class: "mbtn btn-1 mt-5"%>
-<%= link_to '今日の五問！' ,quizzes_random_select_path , class: "mbtn btn-2 mt-4"%>
+<% if current_user.present? %>
+  <% if current_user.finish_today_quizzes? %>
+    <%= link_to '今日の五問の解説を見る！' ,quizzes_random_select_path , class: "mbtn btn-2 mt-4"%>
+  <% else %>
+    <%= link_to '今日の五問！' ,quizzes_random_select_path , class: "mbtn btn-2 mt-4"%>
+  <% end %>
+<% end %>

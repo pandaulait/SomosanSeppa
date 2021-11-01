@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  quiz: one
+  correct_count: 1
+  answer: MyString
+  content: false
+
+two:
+  user: two
+  quiz: two
+  correct_count: 1
+  answer: MyString
+  content: false
