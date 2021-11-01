@@ -5,8 +5,50 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name:  "Example User",
-             email: "admin@example.com",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true)
+
+
+# 管理者作成
+User.find_or_create_by(email: "admin@example.com") do |user|
+  user.email = "example@example.com"
+  user.name = "Example Admin"
+  user.password =            "foobar"
+  user.password_confirmation = "foobar"
+  user.admin = true
+end
+
+# @quizzes = [
+#   {
+#     user_id: user.id,
+#     content: "「作麼生」とかいてなんと読む#{i}",
+#     explanation: "「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。",
+#     status: 1,
+#     choices:[
+#       {quiz_id: i,content: "さもさん", is_answer: false},
+#       {quiz_id: i,content: "たもさん", is_answer: false},
+#       {quiz_id: i,content: "そもさん", is_answer: true},
+#       {quiz_id: i,content: "すもさん", is_answer: false}
+#     ]
+#   }
+# ]
+
+# ダミーデータを20作成
+user = User.find_by(email: "admin@example.com")
+explanation = "「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。"
+20.times do |n|
+  Quiz.create!(
+    user_id: user.id,
+    content: "test#{n.to_s}",
+    explanation: explanation,
+    status: 1
+  )
+  quiz = Quiz.find_by(content: "test#{n.to_s}")
+  4.times do |m|
+    a = false
+    a = true if m == 2
+    Choice.create!(
+        quiz_id: quiz.id,
+        content: "choice#{m.to_s}",
+        is_answer: a
+      )
+  end
+end

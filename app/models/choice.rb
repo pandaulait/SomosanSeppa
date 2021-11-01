@@ -26,6 +26,7 @@ class Choice < ApplicationRecord
     normalize(is_answers)
     # Choiceのcontentが""出ない場合、is_answerと合わせて保存する。
     all_valid = true
+    all_valid = false if choices.count == 0
     Choice.transaction(joinable: false, requires_new: true) do
       i = 0
       while i < choices.count

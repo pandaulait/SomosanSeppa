@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_10_31_043239) do
     t.integer "user_id", null: false
     t.integer "quiz_id", null: false
     t.integer "correct_count", null: false
-    t.string "statanswer", null: false
+    t.string "answer", null: false
     t.boolean "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,12 +71,12 @@ ActiveRecord::Schema.define(version: 2021_10_31_043239) do
 
   create_table "today_quizzes", force: :cascade do |t|
     t.date "content", null: false
-    t.integer "quiz_id_id", null: false
+    t.integer "quiz_id", null: false
     t.integer "challenger", default: 0, null: false
     t.integer "correct_answerer", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quiz_id_id"], name: "index_today_quizzes_on_quiz_id_id"
+    t.index ["quiz_id"], name: "index_today_quizzes_on_quiz_id"
   end
 
   create_table "users", force: :cascade do |t|
