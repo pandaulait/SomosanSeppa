@@ -23,7 +23,7 @@ class Quiz < ApplicationRecord
     if Quiz.all.published.size < len
       len = Quiz.all.published.size
     end
-    quizzes_number = Quiz.all.published.map.with_index{|q,i| [i+1, q.solved_times_by(user)]}
+    quizzes_number = Quiz.all.published.map.with_index{|q,i| [q.id, q.solved_times_by(user)]}
     quiz_number =  quizzes_number.sort {|a,b| a[1] <=> b[1]}[0.. len].sample[0]
     find(quiz_number)
   end
