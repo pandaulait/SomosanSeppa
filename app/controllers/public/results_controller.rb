@@ -1,4 +1,5 @@
 class Public::ResultsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @user = User.find(params[:user_id])
     @results = @user.results.order(id: "DESC")
@@ -20,6 +21,7 @@ class Public::ResultsController < ApplicationController
     i = 0
     all_correct = true
     correct_count = 0
+    # 回答と解答からスコアを保存
     @choices.each do |choice|
       if choice.is_answer == @answers[i]
         correct_count += 1

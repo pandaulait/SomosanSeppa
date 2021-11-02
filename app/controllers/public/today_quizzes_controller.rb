@@ -20,6 +20,7 @@ class Public::TodayQuizzesController < ApplicationController
   end
 
   private
+  # 今日、今日の五問に挑戦しているか
   def ensure_finished_today_quiz
     unless TodayResult.all.where("created_at >= ?", Date.today).where(user_id: current_user.id).present?
       current_user.update(today_status: 0)

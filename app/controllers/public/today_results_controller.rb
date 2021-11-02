@@ -4,9 +4,6 @@ class Public::TodayResultsController < ApplicationController
   layout 'answer'
   def index
     @today_quizzes = TodayQuiz.where(content: Date.today)
-    # @quiz = @today_quizzes.first.quiz
-    # @result = @today_quizzes.first.today_results.find_by(user_id: current_user.id)
-    # byebug
   end
 
 
@@ -29,13 +26,12 @@ class Public::TodayResultsController < ApplicationController
       i+= 1
     end
     @today_result = TodayResult.new(user_id: current_user.id, quiz_id: @quiz.id, today_quiz_id: today_quiz.id, content: all_correct, correct_count: correct_count, answer: @answers.join(" "))
-    # byebug
+
     if @today_result.save
       status = current_user.today_status + 1
       current_user.update(today_status: status)
       today_quiz.update(challenger: today_quiz.challenger+1)
       today_quiz.update(correct_answerer: today_quiz.correct_answerer+1) if all_correct
-
       redirect_to today_quizzes_path
     else
       redirect_to root_path
@@ -43,6 +39,7 @@ class Public::TodayResultsController < ApplicationController
   end
 
   private
+  # 解答の正規化
   def normalize(array)
     flag = 0
     i = 0
@@ -67,7 +64,7 @@ class Public::TodayResultsController < ApplicationController
     array.push(true_count)
     return array
   end
-
+  # 今日、今日の五問に挑戦しているか
   def ensure_finished_today_quiz
     unless TodayResult.all.where("created_at >= ?", Date.today).where(user_id: current_user.id).present?
       current_user.update(today_status: 0)
