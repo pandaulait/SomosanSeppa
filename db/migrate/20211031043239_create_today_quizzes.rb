@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTodayQuizzes < ActiveRecord::Migration[5.2]
   def change
     create_table :today_quizzes do |t|

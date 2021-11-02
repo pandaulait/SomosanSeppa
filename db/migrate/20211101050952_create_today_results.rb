@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTodayResults < ActiveRecord::Migration[5.2]
   def change
     create_table :today_results do |t|
