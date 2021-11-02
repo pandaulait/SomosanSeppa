@@ -1,4 +1,6 @@
-
+<%= link_to '認証済のみ' ,admin_quizzes_path(sort: 0), class: "ml-3 text-dark" %>
+<%= link_to '未認証のみ' ,admin_quizzes_path(sort: 1), class: "text-dark"  %>
+<%= link_to '全表示' ,admin_quizzes_path, class: "text-dark" %>
 <table class="table">
   <thead>
     <th>ID</th>
@@ -14,7 +16,7 @@
         <td><%= quiz.user.name %></td>
         <td><%= quiz.content.truncate(10) %></td>
         <td><%= quiz.solved_times %></td>
-        <td><%= quiz.status%></td>
+        <td><%= quiz.status_i18n %></td>
       </tr>
     <% end %>
   </tbody>

@@ -2,6 +2,7 @@ class Public::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
   before_action :ensure_normal_admin, only: [:update]
+  before_action :ensure_today_quiz, only: [:edit, :update]
 
   def show
     @quiz = Quiz.find(params[:id])
@@ -12,6 +13,8 @@ class Public::QuizzesController < ApplicationController
 
   def index
     @quizzes = Quiz.all.published.order(created_at: :desc)
+    @quizzes = @quizzes.authenticated if params[:sort] == "0"
+    @quizzes = @quizzes.unauthenticated if params[:sort] == "1"
   end
 
   def new
@@ -50,6 +53,7 @@ class Public::QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
     @choices = @quiz.choices
     # クイズを更新したのち、選択肢も更新し、エラーが発生した場合ロールバック
+    @quiz.status = "unauthenticated" if @quiz.status == "authenticated"
     if @quiz.update(quiz_params)
       choices = params[:quiz][:choices]
       @is_answers = params[:quiz][:choice][:is_answer]
@@ -93,7 +97,14 @@ class Public::QuizzesController < ApplicationController
     return if current_user.email != 'admin@example.com'
 
     flash[:alert] = 'ゲスト管理者権限では、ステータスの変更はできません。'
-    redirect_to request.referer
+    redirect_to quiz_path(Quiz.find(params[:id]))
+  end
+
+  def ensure_today_quiz
+    return unless Quiz.find(params[:id]).today_quizzes.find_by(content: Date.today).present?
+
+    flash[:alert] = '今日の5問に選ばれているため、編集ができません。また後日編集するか、新規作成を行ってください。'
+    redirect_to quiz_path(Quiz.find(params[:id]))
   end
   # def quiz_params
   #   params.require(:quiz).permit(:choice, :explanation)
