@@ -65,6 +65,8 @@ class Choice < ApplicationRecord
         end
         i+=1
       end
+      all_valid = false if Quiz.find(quiz_id).choices.count < 2
+
       # 回答がない場合、やり直し
       if is_answers[-1] < 1
         all_valid = false

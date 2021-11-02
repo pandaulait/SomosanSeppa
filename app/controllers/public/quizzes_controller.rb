@@ -32,12 +32,10 @@ class Public::QuizzesController < ApplicationController
             redirect_to quiz_path(@quiz)
           end
         else
-          flash.now[:alert] ="更新に失敗しました。"
-          render :new
+          flash.now[:alert] ="更新に失敗しました。正解の選択肢にチェックをおつけください。"
           raise ActiveRecord::Rollback
         end
-      else
-        render :new
+        # render :new
       end
     end
   end
