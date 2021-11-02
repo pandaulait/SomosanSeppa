@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       resources :choices, only: [:new, :destroy, :create]
     end
     get '/seppa' => 'quizzes#seppa', as: 'seppa'
+    get 'today_quizzes/somosan', to: 'today_quizzes#somosan'
+    get 'today_quizzes/seppa' => 'today_quizzes#seppa'
     resources :today_quizzes, only: [:index]
     resources :today_results, only: [:create, :index]
     root to: 'homes#top'
@@ -36,8 +38,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :quizzes
-    resources :categories, only: [:index, :create, :destroy]
+    resources :quizzes, only: [:show, :index, :show]
+    resources :categories, only: [:index, :update, :destroy]
     resources :users, only: [:index, :update]
   end
 end

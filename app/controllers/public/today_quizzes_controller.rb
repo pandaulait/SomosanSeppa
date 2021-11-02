@@ -13,6 +13,11 @@ class Public::TodayQuizzesController < ApplicationController
     # byebug
   end
 
+  def somosan
+  end
+
+  def seppa
+  end
 
   private
   def ensure_finished_today_quiz

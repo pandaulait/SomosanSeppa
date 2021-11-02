@@ -11,7 +11,7 @@ class Public::QuizzesController < ApplicationController
 
 
   def index
-    @quizzes = Quiz.all.published
+    @quizzes = Quiz.all.published.order(created_at: :desc)
   end
 
   def new
