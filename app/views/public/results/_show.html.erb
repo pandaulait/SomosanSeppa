@@ -9,7 +9,7 @@
 <%= render 'public/users/quiz_author_icon' ,quiz: quiz %>
 <span class="yusei-magic"><%= quiz.user.name %> さん)</span>
 <div class="quiz-content mb-3">
-  <%= quiz.content %><br/>
+  <%= safe_join(quiz.content.split("\n"),tag(:br)) %>
 </div>
 <!--回答と解答の表示-->
 <span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
@@ -25,5 +25,5 @@
 <!--解説の表示-->
 <span class="yusei-magic-l pl-3 pt-3 mx-auto">解説</span>
 <div class="quiz-explanation">
-  <%= quiz.explanation %>
+  <%= safe_join(quiz.explanation.split("\n"),tag(:br)) %>
 </div>

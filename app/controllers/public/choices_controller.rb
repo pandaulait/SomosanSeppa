@@ -31,7 +31,7 @@ class Public::ChoicesController < ApplicationController
   def choice_params
     params.require(:choice).permit(:quiz_id, :content, :is_answer)
   end
-
+  # current_userとクイズの作者が一致しているかどうか
   def ensure_correct_user
     user = Quiz.find(params[:quiz_id]).user
     return if (user == current_user || current_user.admin?)

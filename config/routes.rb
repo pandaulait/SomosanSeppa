@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     sessions:      'public/devise/sessions',
     registrations: 'public/devise/registrations'
   }
+  # devise_scope :user do
+  #   get '/users', to: 'devise/registrations#new'
+  # end
 
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
@@ -38,8 +41,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :quizzes, only: [:show, :index, :show]
-    resources :categories, only: [:index, :update, :destroy]
+    resources :quizzes, only: [:show,:update, :index, :show]
+    resources :categories, only: [:index, :create, :destroy]
     resources :users, only: [:index, :update]
   end
 end

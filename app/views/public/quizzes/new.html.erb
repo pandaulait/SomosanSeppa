@@ -19,6 +19,7 @@
   </div>
   <%= f.text_area :explanation , :placeholder => "解説(10〜500文字)\n(例)「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。",class: "form-control mb-3 quiz-explaination-textarea"%>
   <span class="quiz_explanation-error"><%= render 'layouts/error_messages', obj: @quiz, column: :explanation %></span>
+  
   <%= f.submit '保存', class: "btn btn-light"%>
 <% end %>
 <div id="output"></div>

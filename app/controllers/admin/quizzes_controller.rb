@@ -29,7 +29,7 @@ class Admin::QuizzesController < ApplicationController
   def admin_user
     redirect_to root_path unless current_user.admin?
   end
-
+  # ゲスト管理者判定
   def ensure_normal_admin
     return if current_user.email != 'admin@example.com'
 

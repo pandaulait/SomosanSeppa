@@ -21,6 +21,7 @@ class Public::QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     @quiz.user_id = current_user.id
+    # クイズを保存したのち、選択肢も保存し、エラーが発生した場合ロールバック
     Quiz.transaction(joinable: false, requires_new: true) do
       if @quiz.save
         @choices = params[:quiz][:choices]
@@ -32,12 +33,12 @@ class Public::QuizzesController < ApplicationController
             redirect_to quiz_path(@quiz)
           end
         else
-          flash.now[:alert] ="更新に失敗しました。正解の選択肢にチェックをおつけください。"
+          flash.now[:alert] ="更新に失敗しました。正解の選択肢にチェックはついていますか。"
           raise ActiveRecord::Rollback
         end
-        # render :new
       end
     end
+    # エラー表示はajaxでcreate.js.erbへ
   end
 
   def edit
@@ -48,6 +49,7 @@ class Public::QuizzesController < ApplicationController
   def update
     @quiz = Quiz.find(params[:id])
     @choices = @quiz.choices
+    # クイズを更新したのち、選択肢も更新し、エラーが発生した場合ロールバック
     if @quiz.update(quiz_params)
       choices = params[:quiz][:choices]
       @is_answers = params[:quiz][:choice][:is_answer]
@@ -60,14 +62,8 @@ class Public::QuizzesController < ApplicationController
           redirect_to quiz_path(@quiz)
         end
       else
-        if @alert.present?
-          flash[:alert] = @alert
-        end
         flash.now[:alert] ="更新に失敗しました。"
-        render :edit
       end
-    else
-      render :edit
     end
   end
 
@@ -84,13 +80,15 @@ class Public::QuizzesController < ApplicationController
   def quiz_params
     params.require(:quiz).permit(:content, :explanation)
   end
+  # current_userとクイズの作者が一致しているかどうか
   def ensure_correct_user
     user = Quiz.find(params[:id]).user
     return if (user == current_user || current_user.admin?)
 
-    flash[:alert] = '他人のコラムは編集できません。'
+    flash[:alert] = '他人のクイズは編集できません。'
     redirect_to root_path
   end
+  # ゲスト管理者でないか
   def ensure_normal_admin
     return if current_user.email != 'admin@example.com'
 
