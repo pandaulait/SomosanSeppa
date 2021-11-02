@@ -1,2 +1,6 @@
-module Public::ResultsHelper
+# frozen_string_literal: true
+
+module Public
+  module ResultsHelper
+  end
 end

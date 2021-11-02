@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
-class Public::TodayQuizzesControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get public_today_quizzes_index_url
-    assert_response :success
+module Public
+  class TodayQuizzesControllerTest < ActionDispatch::IntegrationTest
+    test 'should get index' do
+      get public_today_quizzes_index_url
+      assert_response :success
+    end
   end
-
 end
