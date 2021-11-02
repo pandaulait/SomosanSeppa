@@ -1,6 +1,7 @@
 class Public::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_normal_admin, only: [:update]
 
   def show
     @quiz = Quiz.find(params[:id])
@@ -91,6 +92,12 @@ class Public::QuizzesController < ApplicationController
 
     flash[:alert] = '他人のコラムは編集できません。'
     redirect_to root_path
+  end
+  def ensure_normal_admin
+    return if current_user.email != 'admin@example.com'
+
+    flash[:alert] = 'ゲスト管理者権限では、ステータスの変更はできません。'
+    redirect_to request.referer
   end
   # def quiz_params
   #   params.require(:quiz).permit(:choice, :explanation)
