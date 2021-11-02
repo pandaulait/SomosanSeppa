@@ -4,7 +4,7 @@
 <span class="yusei-magic"><%= @quiz.user.name %> さん<%= ', 管理者認証済' if @quiz.authenticated? %>)</span>
 
 <div class="quiz-content mt-2">
-  <%= @quiz.content %><br/>
+  <%= safe_join(@quiz.content.split("\n"),tag(:br)) %>
 </div>
 
 

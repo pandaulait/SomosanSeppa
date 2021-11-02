@@ -4,7 +4,7 @@ class Admin::QuizzesController < ApplicationController
   before_action :ensure_normal_admin, only: [:update]
   layout 'admin'
   def index
-    @quizzes = Quiz.all
+    @quizzes = Quiz.all.order(created_at: :desc)
   end
 
 
@@ -15,8 +15,6 @@ class Admin::QuizzesController < ApplicationController
   end
 
 
-  def edit
-  end
 
   def show
     @quiz = Quiz.find(params[:id])
