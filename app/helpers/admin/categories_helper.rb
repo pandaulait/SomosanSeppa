@@ -1,6 +1,2 @@
-# frozen_string_literal: true
-
-module Admin
-  module CategoriesHelper
-  end
+module Admin::CategoriesHelper
 end

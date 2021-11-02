@@ -1,6 +1,2 @@
-# frozen_string_literal: true
-
-module Public
-  module HomesHelper
-  end
+module Public::HomesHelper
 end

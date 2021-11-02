@@ -1,6 +1,3 @@
-# frozen_string_literal: true
+module Public::ChoicesHelper
 
-module Public
-  module ChoicesHelper
-  end
 end
