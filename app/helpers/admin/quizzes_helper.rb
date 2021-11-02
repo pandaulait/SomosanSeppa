@@ -1,6 +1,2 @@
-# frozen_string_literal: true
-
-module Admin
-  module QuizzesHelper
-  end
+module Admin::QuizzesHelper
 end
