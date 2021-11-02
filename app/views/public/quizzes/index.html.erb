@@ -1,14 +1,19 @@
+<%= link_to '認証済のみ' , quizzes_path(sort: 0), class: "ml-3 text-dark" %>
+<%= link_to '未認証のみ' , quizzes_path(sort: 1), class: "text-dark"  %>
+<%= link_to '全表示' , quizzes_path, class: "text-dark" %>
 <table class="table">
   <thead>
     <th>問題文</th>
     <th>作者</th>
     <th>解かれた回数</th>
-
   </thead>
   <tbody>
     <% @quizzes.each do |quiz| %>
       <tr>
-        <td><%= link_to quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %></td>
+        <td>
+          <% if quiz.status =="authenticated" %>[認]<% end %>
+          <%= link_to quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %>
+        </td>
         <td><%= render 'public/users/quiz_author_icon', quiz: quiz %> <%= quiz.user.name %></td>
 
         <td>
@@ -19,7 +24,6 @@
             未
           <% end %>)
         </td>
-        <td><%= quiz.status_i18n %></td>
       </tr>
     <% end %>
   </tbody>

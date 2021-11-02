@@ -5,6 +5,8 @@ class Admin::QuizzesController < ApplicationController
   layout 'admin'
   def index
     @quizzes = Quiz.all.order(created_at: :desc)
+    @quizzes = @quizzes.authenticated if params[:sort] == "0"
+    @quizzes = @quizzes.unauthenticated if params[:sort] == "1"
   end
 
 

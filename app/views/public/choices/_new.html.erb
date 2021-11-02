@@ -10,9 +10,7 @@
             <%= f.hidden_field :is_answer, :value => false %>
             <%= f.hidden_field :quiz_id%>
             <%= f.text_field :content, class: "form-control content-edit m-1" ,:placeholder => "新しい選択肢" %>
-            <div class="content-error_messages">
-              
-            </div>
+            <div class="content-error_messages"> </div>
             <%= f.submit '保存', class: "btn btn-light"%>
           <% end %>
         </div>
