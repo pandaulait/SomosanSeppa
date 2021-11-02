@@ -11,8 +11,8 @@
 User.find_or_create_by(email: "admin@example.com") do |user|
   user.email = "admin@example.com"
   user.name = "Example Admin"
-  user.password =            "foobar"
-  user.password_confirmation = "foobar"
+  user.password =              "adminexample"
+  user.password_confirmation = "adminexample"
   user.admin = true
 end
 User.find_or_create_by(email: ENV["ADMIN_EMAIL"]) do |user|
@@ -38,7 +38,7 @@ end
 # ]
 
 # ダミーデータを20作成
-user = User.find_by(email: "admin@example.com")
+user = User.find_by(email: ENV["ADMIN_EMAIL"])
 explanation = "「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。"
 5.times do |n|
   Quiz.create!(
