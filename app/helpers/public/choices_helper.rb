@@ -1,3 +1,2 @@
 module Public::ChoicesHelper
-
 end

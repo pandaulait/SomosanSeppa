@@ -5,10 +5,9 @@ class Admin::QuizzesController < ApplicationController
   layout 'admin'
   def index
     @quizzes = Quiz.all.order(created_at: :desc)
-    @quizzes = @quizzes.authenticated if params[:sort] == "0"
-    @quizzes = @quizzes.unauthenticated if params[:sort] == "1"
+    @quizzes = @quizzes.authenticated if params[:sort] == '0'
+    @quizzes = @quizzes.unauthenticated if params[:sort] == '1'
   end
-
 
   def update
     @quiz = Quiz.find(params[:id])
@@ -16,14 +15,12 @@ class Admin::QuizzesController < ApplicationController
     redirect_to admin_quiz_path(@quiz)
   end
 
-
-
   def show
     @quiz = Quiz.find(params[:id])
   end
 
-
   private
+
   def quiz_params
     params.require(:quiz).permit(:status)
   end
@@ -31,6 +28,7 @@ class Admin::QuizzesController < ApplicationController
   def admin_user
     redirect_to root_path unless current_user.admin?
   end
+
   # ゲスト管理者判定
   def ensure_normal_admin
     return if current_user.email != 'admin@example.com'

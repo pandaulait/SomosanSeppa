@@ -12,12 +12,11 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to user_path(@user)
-    end
+    redirect_to user_path(@user) if @user.update(user_params)
   end
 
   private
+
   # 編集されるユーザーとcurrent_userが同じかどうか
   def ensure_correct_user
     user = User.find(params[:id])
@@ -26,6 +25,7 @@ class Public::UsersController < ApplicationController
     flash[:alert] = '他人のデータは編集できません。'
     redirect_to root_path
   end
+
   # ゲストユーザー判定
   def ensure_normal_user
     return if current_user.email != 'guest@example.com'
