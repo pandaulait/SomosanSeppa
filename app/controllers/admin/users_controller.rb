@@ -29,5 +29,4 @@ class Admin::UsersController < ApplicationController
     flash[:alert] = 'ゲスト管理者権限では、ステータスの変更はできません。'
     redirect_to request.referer
   end
-
 end

@@ -9,26 +9,28 @@ class User < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :today_results, dependent: :destroy
 
-
-
   # そのクイズを答えたことがあるか
   def answered?(quiz)
     results.where(quiz_id: quiz.id).present?
   end
+
   # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
+      user.name = 'guest'
       user.password = SecureRandom.urlsafe_base64
       # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
       # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
     end
   end
+
   # 今日の五問を解き終わったか
   def finish_today_quizzes?
     flag = true
     flag = false if today_status < 5
     flag
   end
+
   # 今日の五問の正解数
   def today_quiz_score
     score = 0
