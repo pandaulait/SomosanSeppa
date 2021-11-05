@@ -24,3 +24,8 @@ SomosanSeppaは、好きな情報を切り取って生活をすることが増�
 100歳になっても、何歳になっても「なんで空は青いのだろう」と問いを見つけられる人になりたい人に、私は話しかけます。
 </br>
 **「作麼生！！！」**
+## 設計
+## 機能一覧
+
+### ER図
+![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/84437188/140520645-847247ae-0f1b-4db3-a5bc-a9f8ec0630e1.png)
