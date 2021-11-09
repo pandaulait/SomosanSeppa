@@ -14,6 +14,7 @@
           <% if quiz.status =="authenticated" %>[認]<% end %>
           <%= link_to selection_quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %>
         </td>
+        
         <td><%= render 'public/users/quiz_author_icon', quiz: quiz %> <%= quiz.user.name %></td>
         <td>
           <%= quiz.solved_times %>回(
