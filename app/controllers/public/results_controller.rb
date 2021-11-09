@@ -14,9 +14,8 @@ class Public::ResultsController < ApplicationController
   def create
     @answers = normalize(params[:result][:answer])
     @quiz = SelectionQuiz.find(params[:selection_quiz_id])
-    @result = Result.new
+    @result = @quiz.results.new
     @result.user_id = current_user.id
-    @result.selection_quiz_id = @quiz.id
     @choices = @quiz.choices
     i = 0
     all_correct = true

@@ -7,7 +7,7 @@ class Public::SelectionQuizzesController < ApplicationController
   def show
     @quiz = SelectionQuiz.find(params[:id])
     @choices = @quiz.choices
-    @result = Result.new
+    @result = @quiz.results.new
   end
 
   def index

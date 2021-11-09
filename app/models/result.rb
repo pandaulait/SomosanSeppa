@@ -1,11 +1,12 @@
 class Result < ApplicationRecord
   validates :user_id, presence: true
-  validates :selection_quiz_id, presence: true
+  validates :quiz_id, presence: true
+  validates :quiz_type, presence: true
   validates :correct_count, presence: true
   validates :content, inclusion: { in: [true, false] }
   validates :answer, presence: true
   belongs_to :user
-  belongs_to :selection_quiz
+  belongs_to :quiz, polymorphic: true
 
   # 回答の配列のtrueをstringからbooleanへ
   def to_answer_array(number)

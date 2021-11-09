@@ -2,22 +2,23 @@
 <table class="table">
   <thead>
     <th class="yusei-magic">問題文</th>
-    <th class="yusei-magic">正解数</br>/選択肢</th>
+    <!--<th class="yusei-magic">正解数</br>/選択肢</th>-->
     <th class="yusei-magic">結果</th>
   </thead>
   <tbody>
     <% @results.each do |result| %>
     <tr>
-      <td><%= result.selection_quiz.content.truncate(10) %></td>
-      <td><%= result.correct_count %> / <%= result.selection_quiz.choices.count %> </td>
+      <td><%= result.quiz.content.truncate(10) %></td>
       <td>
         <% if result.content %>
           正解
         <% else %>
           不正解
         <% end %>
+        <% if result.quiz_type =="SelectionQuiz" %>
+          (<%= result.correct_count %> / <%= result.quiz.choices.count %>)
+        <% end %>
       </td>
-
     </tr>
     <% end %>
   </tbody>

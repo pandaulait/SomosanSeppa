@@ -6,7 +6,7 @@ class SelectionQuiz < ApplicationRecord
 
   belongs_to :user
   has_many :choices, dependent: :destroy
-  has_many :results, dependent: :destroy
+  has_many :results, as: :quiz, dependent: :destroy
   has_many :today_quizzes, dependent: :destroy
 
   # クイズが解かれた回数
