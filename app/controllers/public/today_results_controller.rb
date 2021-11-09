@@ -32,6 +32,7 @@ class Public::TodayResultsController < ApplicationController
       current_user.update(today_status: status)
       today_quiz.update(challenger: today_quiz.challenger + 1)
       today_quiz.update(correct_answerer: today_quiz.correct_answerer + 1) if all_correct
+      current_user.get_exp(5)
       redirect_to today_quizzes_path
     else
       redirect_to root_path

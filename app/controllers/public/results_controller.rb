@@ -33,6 +33,7 @@ class Public::ResultsController < ApplicationController
     @result.correct_count = correct_count
     @result.answer = @answers.join(' ')
     if @result.save
+      current_user.get_exp(10)
       redirect_to selection_quiz_result_path(@quiz, @result)
     else
       render('selection_quiz/show')
