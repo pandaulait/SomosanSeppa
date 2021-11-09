@@ -72,12 +72,13 @@ ActiveRecord::Schema.define(version: 2021_11_09_012821) do
 
   create_table "today_quizzes", force: :cascade do |t|
     t.date "content", null: false
-    t.integer "selection_quiz_id", null: false
+    t.string "quiz_type"
+    t.integer "quiz_id"
     t.integer "challenger", default: 0, null: false
     t.integer "correct_answerer", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["selection_quiz_id"], name: "index_today_quizzes_on_selection_quiz_id"
+    t.index ["quiz_type", "quiz_id"], name: "index_today_quizzes_on_quiz_type_and_quiz_id"
   end
 
   create_table "today_results", force: :cascade do |t|

@@ -9,7 +9,7 @@ class Public::TodayResultsController < ApplicationController
   def create
     @answers = normalize(params[:today_result][:answer])
     today_quiz = TodayQuiz.where(content: Date.today)[current_user.today_status]
-    @quiz = today_quiz.selection_quiz
+    @quiz = today_quiz.quiz
     @today_result = TodayResult.new
     @choices = @quiz.choices
 
