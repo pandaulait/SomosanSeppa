@@ -26,7 +26,5 @@
   <%= render 'layouts/error_messages', obj: @result, column: :correct_count %>
 <% end %>
 
-<% if current_user.id == @quiz.user.id %>
-  <%= link_to '編集', edit_quiz_path(@quiz) %>
-<% end %>
+
 
