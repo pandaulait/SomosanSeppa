@@ -12,7 +12,6 @@ class TodayQuiz < ApplicationRecord
     TodayQuiz.transaction(joinable: false, requires_new: true) do
       sample_5.each do |sample|
         today_quiz = TodayQuiz.new(content: Date.today, quiz_id: sample[0].id, quiz_type: sample[0].class)
-        byebug
         all_valid &= today_quiz.save
       end
       raise ActiveRecord::Rollback unless all_valid

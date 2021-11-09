@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   # そのクイズを答えたことがあるか
   def answered?(quiz)
-    results.where(selection_quiz_id: quiz.id).present?
+    results.where(quiz_id: quiz.id, quiz_type: quiz.class.to_s).present?
   end
 
   # ゲストログイン
