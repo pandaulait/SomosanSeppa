@@ -16,7 +16,7 @@
         <%= i.hidden_field :choice_id ,name: "selection_quiz[choice_id][]",  :value => choice.id %>
         <%= i.check_box :is_answer ,{multiple: true, class: "mx-2 my-auto"} %>
         <%= i.text_field :content, name: "selection_quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
-        <% if @quiz.user == current_user %>
+        <% if @quiz.user == current_user || current_user.admin?%>
           <%= link_to "×", selection_quiz_choice_path(@quiz, choice), method: :delete, class: "sbtn btn-light px-3 m-1"%>
         <% end %>
       </div>
