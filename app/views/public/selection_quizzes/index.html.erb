@@ -1,6 +1,6 @@
-<%= link_to '認証済のみ' , quizzes_path(sort: 0), class: "ml-3 text-dark" %>
-<%= link_to '未認証のみ' , quizzes_path(sort: 1), class: "text-dark"  %>
-<%= link_to '全表示' , quizzes_path, class: "text-dark" %>
+<%= link_to '認証済のみ' , selection_quizzes_path(sort: 0), class: "ml-3 text-dark" %>
+<%= link_to '未認証のみ' , selection_quizzes_path(sort: 1), class: "text-dark"  %>
+<%= link_to '全表示' , selection_quizzes_path, class: "text-dark" %>
 <table class="table">
   <thead>
     <th>問題文</th>
@@ -12,7 +12,7 @@
       <tr>
         <td>
           <% if quiz.status =="authenticated" %>[認]<% end %>
-          <%= link_to quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %>
+          <%= link_to selection_quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %>
         </td>
         <td><%= render 'public/users/quiz_author_icon', quiz: quiz %> <%= quiz.user.name %></td>
 

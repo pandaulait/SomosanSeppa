@@ -1,4 +1,4 @@
-class Quiz < ApplicationRecord
+class SelectionQuiz < ApplicationRecord
   enum status: { unauthenticated: 0, authenticated: 1, unpublished: 2 }
 
   validates :content,     presence: true, length: { in: 3..200 }
@@ -6,8 +6,10 @@ class Quiz < ApplicationRecord
 
   belongs_to :user
   has_many :choices, dependent: :destroy
-  has_many :results, dependent: :destroy
-  has_many :today_quizzes, dependent: :destroy
+  has_many :results, as: :quiz, dependent: :destroy
+  has_many :today_quizzes, as: :quiz, dependent: :destroy
+  has_many :today_results, as: :quiz, dependent: :destroy
+
 
   # クイズが解かれた回数
   def solved_times
@@ -22,8 +24,8 @@ class Quiz < ApplicationRecord
   # ユーザーの最近解いてないクイズを1問用意する
   def self.randomly_selected(user)
     len = 5
-    len = Quiz.all.published.size if Quiz.all.published.size < len
-    quizzes_number = Quiz.all.published.map.with_index { |q, _i| [q.id, q.solved_times_by(user)] }
+    len = SelectionQuiz.all.published.size if SelectionQuiz.all.published.size < len
+    quizzes_number = SelectionQuiz.all.published.map.with_index { |q, _i| [q.id, q.solved_times_by(user)] }
     quiz_number =  quizzes_number.sort { |a, b| a[1] <=> b[1] }[0..len].sample[0]
     find(quiz_number)
   end

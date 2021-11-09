@@ -6,17 +6,16 @@ class Public::ResultsController < ApplicationController
   end
 
   def show
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = SelectionQuiz.find(params[:selection_quiz_id])
     @result = Result.find(params[:id])
     render layout: 'answer'
   end
 
   def create
     @answers = normalize(params[:result][:answer])
-    @quiz = Quiz.find(params[:quiz_id])
-    @result = Result.new
+    @quiz = SelectionQuiz.find(params[:selection_quiz_id])
+    @result = @quiz.results.new
     @result.user_id = current_user.id
-    @result.quiz_id = @quiz.id
     @choices = @quiz.choices
     i = 0
     all_correct = true
@@ -34,9 +33,9 @@ class Public::ResultsController < ApplicationController
     @result.correct_count = correct_count
     @result.answer = @answers.join(' ')
     if @result.save
-      redirect_to quiz_result_path(@quiz, @result)
+      redirect_to selection_quiz_result_path(@quiz, @result)
     else
-      render('quiz/show')
+      render('selection_quiz/show')
     end
   end
 

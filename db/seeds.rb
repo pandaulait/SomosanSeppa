@@ -40,18 +40,18 @@ end
 user = User.find_by(email: ENV['ADMIN_EMAIL'])
 explanation = '「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。'
 5.times do |n|
-  Quiz.create!(
+  SelectionQuiz.create!(
     user_id: user.id,
     content: "test#{n}",
     explanation: explanation,
     status: 1
   )
-  quiz = Quiz.find_by(content: "test#{n}")
+  quiz = SelectionQuiz.find_by(content: "test#{n}")
   4.times do |m|
     a = false
     a = true if m == 2
     Choice.create!(
-      quiz_id: quiz.id,
+      selection_quiz_id: quiz.id,
       content: "choice#{m}",
       is_answer: a
     )

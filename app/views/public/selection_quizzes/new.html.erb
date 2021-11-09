@@ -1,4 +1,4 @@
-<%= form_with model: @quiz, url: quizzes_path, remote: true do |f| %>
+<%= form_with model: @quiz, url: selection_quizzes_path, remote: true do |f| %>
   <h4 class="yusei-magic pl-3 pt-3 mx-auto">クイズ新規作成</h4>
   <%= f.text_area :content , :placeholder => "問題文を書こう(10〜200文字)\n(例)「そもさん」とは、どう言う意味？", class: "form-control mb-4 quiz-content-textarea" %>
   <span class="quiz_content-error"><%= render 'layouts/error_messages', obj: @quiz, column: :content %></span>
@@ -6,12 +6,12 @@
     <%= f.fields_for :choices do |i| %>
       <div class="d-flex choice_input">
         <%= check_box "choice", "is_answer",{multiple: true, class: "mx-2 my-auto"} %>
-        <%= i.text_field :choice, name: "quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
+        <%= i.text_field :choice, name: "selection_quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
         <input type="button" value="－" class="remove pluralBtn m-1">
       </div>
       <div class="d-flex choice_input">
         <%= check_box "choice", "is_answer",{multiple: true, class: "mx-2 my-auto"} %>
-        <%= i.text_field :choice, name: "quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
+        <%= i.text_field :choice, name: "selection_quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
         <input type="button" value="－" class="remove pluralBtn m-1">
       </div>
       <input type="button" value="選択肢を追加" class="add pluralBtn btn btn-light my-2">
@@ -27,7 +27,7 @@
 <script>
   const choices_form = `<div class="d-flex choice_input">
                           <%= check_box "choice", "is_answer",{multiple: true, class: "mx-2 my-auto" } %>
-                          <input name="quiz[choices][]" type="text" class="form-control target m-1" id="quiz_choices_choice" placeholder="選択肢">
+                          <input name="selection_quiz[choices][]" type="text" class="form-control target m-1" id="quiz_choices_choice" placeholder="選択肢">
                           <input type="button" value="－" class="remove pluralBtn m-1">
                         </div>`
   $(document).on("click", ".add", function () {

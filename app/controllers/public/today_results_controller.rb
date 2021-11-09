@@ -24,7 +24,7 @@ class Public::TodayResultsController < ApplicationController
       end
       i += 1
     end
-    @today_result = TodayResult.new(user_id: current_user.id, quiz_id: @quiz.id, today_quiz_id: today_quiz.id,
+    @today_result = TodayResult.new(user_id: current_user.id, quiz_id: @quiz.id, quiz_type: @quiz.class, today_quiz_id: today_quiz.id,
                                     content: all_correct, correct_count: correct_count, answer: @answers.join(' '))
 
     if @today_result.save

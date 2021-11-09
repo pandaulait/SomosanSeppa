@@ -1,6 +1,6 @@
-<%= link_to 'クイズ一覧に戻る', admin_quizzes_path %>
+<%= link_to 'クイズ一覧に戻る', admin_selection_quizzes_path %>
 <h4 class="yusei-magic pl-3 pt-3 mx-auto">ステータス</h4>
-  <%= form_with model: @quiz, url: admin_quiz_path(@quiz) do |f| %>
+  <%= form_with model: @quiz, url: admin_selection_quiz_path(@quiz) do |f| %>
     <span class="pl-4 yusei-magic">クイズステータス:<%= @quiz.status%></span>
     <%= f.select :status, [["未認証", "unauthenticated"], ["認証済み", "authenticated"], ["非公開", "unpublished"]]%>
     <%= f.submit '更新'%>
@@ -22,6 +22,6 @@
 </div>
 
 <% if current_user.id == @quiz.user.id || current_user.admin?%>
-  <%= link_to '編集', edit_quiz_path(@quiz) %>
+  <%= link_to '編集', edit_selection_quiz_path(@quiz) %>
 <% end %>
 
