@@ -8,8 +8,8 @@
   <tbody>
     <% @results.each do |result| %>
     <tr>
-      <td><%= result.quiz.content.truncate(10) %></td>
-      <td><%= result.correct_count %> / <%= result.quiz.choices.count %> </td>
+      <td><%= result.selection_quiz.content.truncate(10) %></td>
+      <td><%= result.correct_count %> / <%= result.selection_quiz.choices.count %> </td>
       <td>
         <% if result.content %>
           正解

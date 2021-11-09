@@ -7,7 +7,7 @@ class Public::TodayQuizzesController < ApplicationController
     # 次の問題
     today_quizzes = TodayQuiz.where(content: Date.today)
     @number = current_user.today_status
-    @quiz = today_quizzes[@number].quiz
+    @quiz = today_quizzes[@number].selection_quiz
     @choices = @quiz.choices
     @result = TodayResult.new
     # byebug

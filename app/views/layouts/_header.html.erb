@@ -17,17 +17,17 @@
           <%= link_to 'マイページ', user_path(current_user.id) , class: "nav-link active"%>
         </li>
         <li class="nav-item">
-          <%= link_to 'クイズ新規作成', new_quiz_path , class: "nav-link active"%>
+          <%= link_to 'クイズ新規作成', new_selection_quiz_path , class: "nav-link active"%>
         </li>
         <li class="nav-item">
-          <%= link_to 'クイズ一覧', quizzes_path, class: "nav-link active" %>
+          <%= link_to 'クイズ一覧', selection_quizzes_path, class: "nav-link active" %>
         </li>
         <% if current_user.admin? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">管理者ページ</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
               <%= link_to 'ユーザー管理', admin_users_path , class: "dropdown-item"%>
-              <%= link_to 'クイズ管理', admin_quizzes_path , class: "dropdown-item"%>
+              <%= link_to 'クイズ管理', admin_selection_quizzes_path , class: "dropdown-item"%>
             </div>
           </li>
         <% end %>

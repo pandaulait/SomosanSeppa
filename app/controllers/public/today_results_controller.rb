@@ -9,7 +9,7 @@ class Public::TodayResultsController < ApplicationController
   def create
     @answers = normalize(params[:today_result][:answer])
     today_quiz = TodayQuiz.where(content: Date.today)[current_user.today_status]
-    @quiz = today_quiz.quiz
+    @quiz = today_quiz.selection_quiz
     @today_result = TodayResult.new
     @choices = @quiz.choices
 
@@ -24,7 +24,7 @@ class Public::TodayResultsController < ApplicationController
       end
       i += 1
     end
-    @today_result = TodayResult.new(user_id: current_user.id, quiz_id: @quiz.id, today_quiz_id: today_quiz.id,
+    @today_result = TodayResult.new(user_id: current_user.id, selection_quiz_id: @quiz.id, today_quiz_id: today_quiz.id,
                                     content: all_correct, correct_count: correct_count, answer: @answers.join(' '))
 
     if @today_result.save

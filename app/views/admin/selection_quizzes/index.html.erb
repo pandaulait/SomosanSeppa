@@ -1,6 +1,6 @@
-<%= link_to '認証済のみ' ,admin_quizzes_path(sort: 0), class: "ml-3 text-dark" %>
-<%= link_to '未認証のみ' ,admin_quizzes_path(sort: 1), class: "text-dark"  %>
-<%= link_to '全表示' ,admin_quizzes_path, class: "text-dark" %>
+<%= link_to '認証済のみ' ,admin_selection_quizzes_path(sort: 0), class: "ml-3 text-dark" %>
+<%= link_to '未認証のみ' ,admin_selection_quizzes_path(sort: 1), class: "text-dark"  %>
+<%= link_to '全表示' ,admin_selection_quizzes_path, class: "text-dark" %>
 <table class="table">
   <thead>
     <th>ID</th>
@@ -12,7 +12,7 @@
   <tbody>
     <% @quizzes.each do |quiz| %>
       <tr>
-        <td><%= link_to admin_quiz_path(quiz) do %><%= quiz.id %><% end %></td>
+        <td><%= link_to admin_selection_quiz_path(quiz) do %><%= quiz.id %><% end %></td>
         <td><%= quiz.user.name %></td>
         <td><%= quiz.content.truncate(10) %></td>
         <td><%= quiz.solved_times %></td>

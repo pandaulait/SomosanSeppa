@@ -1,28 +1,28 @@
-class Admin::QuizzesController < ApplicationController
+class Admin::SelectionQuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user
   before_action :ensure_normal_admin, only: [:update]
   layout 'admin'
   def index
-    @quizzes = Quiz.all.order(created_at: :desc)
+    @quizzes = SelectionQuiz.all.order(created_at: :desc)
     @quizzes = @quizzes.authenticated if params[:sort] == '0'
     @quizzes = @quizzes.unauthenticated if params[:sort] == '1'
   end
 
   def update
-    @quiz = Quiz.find(params[:id])
-    @quiz.update(quiz_params)
+    @quiz = SelectionQuiz.find(params[:id])
+    @quiz.update(selection_quiz_params)
     redirect_to admin_quiz_path(@quiz)
   end
 
   def show
-    @quiz = Quiz.find(params[:id])
+    @quiz = SelectionQuiz.find(params[:id])
   end
 
   private
 
-  def quiz_params
-    params.require(:quiz).permit(:status)
+  def selection_quiz_params
+    params.require(:selection_quiz).permit(:status)
   end
 
   def admin_user

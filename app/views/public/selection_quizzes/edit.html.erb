@@ -1,4 +1,4 @@
-<%= form_with model: @quiz, url: quiz_path(@quiz), remote: true do |f| %>
+<%= form_with model: @quiz, url: selection_quiz_path(@quiz), remote: true do |f| %>
 <!--問題文の編集area-->
   <span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
   <span class="yusei-magic">(作:</span>
@@ -13,16 +13,16 @@
   <% @choices.each do |choice| %>
     <%= f.fields_for choice do |i| %>
       <div class="d-flex choice_input">
-        <%= i.hidden_field :choice_id ,name: "quiz[choice_id][]",  :value => choice.id %>
+        <%= i.hidden_field :choice_id ,name: "selection_quiz[choice_id][]",  :value => choice.id %>
         <%= i.check_box :is_answer ,{multiple: true, class: "mx-2 my-auto"} %>
-        <%= i.text_field :content, name: "quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
+        <%= i.text_field :content, name: "selection_quiz[choices][]", class: "form-control target m-1" ,:placeholder => "選択肢" %>
         <% if @quiz.user == current_user %>
-          <%= link_to "×", quiz_choice_path(@quiz, choice), method: :delete, class: "sbtn btn-light px-3 m-1"%>
+          <%= link_to "×", selection_quiz_choice_path(@quiz, choice), method: :delete, class: "sbtn btn-light px-3 m-1"%>
         <% end %>
       </div>
     <% end %>
   <% end %>
-  <%= link_to '選択肢を追加', new_quiz_choice_path(@quiz), class: "btn btn-light", remote: true %>
+  <%= link_to '選択肢を追加', new_selection_quiz_choice_path(@quiz), class: "btn btn-light", remote: true %>
   <!--解説の編集エリア-->
   <h4 class="yusei-magic pl-3 pt-3">解説</h4>
   <%= f.text_area :explanation, class: "form-control quiz-explaination-textarea" %>

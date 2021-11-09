@@ -20,8 +20,8 @@ end
 
 class Choice < ApplicationRecord
   validates :content, presence: true, length: { maximum: 100 }
-  belongs_to :quiz
-  def self.choice_update(choices, quiz_id, is_answers, choice_ids)
+  belongs_to :selection_quiz
+  def self.choice_update(choices, selection_quiz_id, is_answers, choice_ids)
     normalize(is_answers)
     # Choiceのcontentが""出ない場合、is_answerと合わせて保存する。
     all_valid = true
@@ -31,7 +31,7 @@ class Choice < ApplicationRecord
       while i < choices.count
         if choices[i].present?
           choice = Choice.find(choice_ids[i])
-          all_valid &= choice.update(content: choices[i], is_answer: is_answers[i], quiz_id: quiz_id)
+          all_valid &= choice.update(content: choices[i], is_answer: is_answers[i], selection_quiz_id: selection_quiz_id)
         end
         i += 1
         true_count += 1 if is_answers[i] == true
@@ -43,7 +43,7 @@ class Choice < ApplicationRecord
     all_valid
   end
 
-  def self.choice_create(choices, quiz_id, is_answers)
+  def self.choice_create(choices, selection_quiz_id, is_answers)
     # @is_answer を正規化
     normalize(is_answers)
     # Choiceのcontentが""出ない場合、is_answerと合わせて保存する。
@@ -52,17 +52,17 @@ class Choice < ApplicationRecord
       i = 0
       while i < choices.count
         if choices[i].present?
-          choice = Choice.new(content: choices[i], is_answer: is_answers[i], quiz_id: quiz_id)
+          choice = Choice.new(content: choices[i], is_answer: is_answers[i], selection_quiz_id: selection_quiz_id)
           all_valid &= choice.save
         end
         i += 1
       end
-      all_valid = false if Quiz.find(quiz_id).choices.count < 2
+      all_valid = false if SelectionQuiz.find(selection_quiz_id).choices.count < 2
 
       # 回答がない場合、やり直し
       if is_answers[-1] < 1
         all_valid = false
-        Quiz.find(quiz_id).errors.add(:base, '正解はひとつ以上設定してください。')
+        SelectionQuiz.find(selection_quiz_id).errors.add(:base, '正解はひとつ以上設定してください。')
       end
 
       raise ActiveRecord::Rollback unless all_valid

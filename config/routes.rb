@@ -22,9 +22,9 @@ Rails.application.routes.draw do
     resources :users, only: %i[show edit update] do
       resources :results, only: [:index]
     end
-    get 'quizzes/random_select', to: 'quizzes#random_select'
-    get 'quizzes/seppa', to: 'quizzes#seppa'
-    resources :quizzes do
+    get 'selection_quizzes/random_select', to: 'selection_quizzes#random_select'
+    get 'selection_quizzes/seppa', to: 'selection_quizzes#seppa'
+    resources :selection_quizzes do
       resources :results, only: %i[create show]
       # get '/answer' => 'results#answer', as: 'answer'
       resources :choices, only: %i[new destroy create]
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :quizzes, only: %i[show update index show]
+    resources :selection_quizzes, only: %i[show update index show]
     resources :categories, only: %i[index create destroy]
     resources :users, only: %i[index update]
   end
