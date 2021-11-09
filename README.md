@@ -22,7 +22,8 @@
  より良い問いに出会うために、管理者が認証を行う。
 ## ワイヤーフレーム
 https://xd.adobe.com/view/9a482c3d-81f3-4336-aacf-3b9554b3071c-cf1b/
-
+## WBS
+https://docs.google.com/spreadsheets/d/1ZhEZ1o4f_EDJXXwTNqysR6aPZduAxCQ0IMCYdsSpC08/edit#gid=2104957408
 ## 機能一覧
 ver 1.0
 | 機能                                                         | 一般ユーザー<br>利用可否 | 管理者<br>利用可否               | 
