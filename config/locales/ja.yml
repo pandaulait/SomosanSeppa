@@ -1,15 +1,15 @@
 ja:
   activerecord:
     models:
-      quiz: クイズ
+      selection_quiz: クイズ
     attributes:
-      quiz:
+      selection_quiz:
         content: 問題文
         user_id: 作者
         explanation: 説明
         status: 認証ステータス
-  enums: 
-    quiz:
+  enums:
+    selection_quiz:
       status: # カラム名
         unauthenticated: '未認証' # enumの値
         authenticated: '認証済' # enumの値
