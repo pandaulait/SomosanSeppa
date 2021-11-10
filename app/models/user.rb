@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :selection_quizzes, dependent: :destroy
   has_many :results, dependent: :destroy
   has_many :today_results, dependent: :destroy
+  has_many :chat_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
 
   # そのクイズを答えたことがあるか
   def answered?(quiz)
