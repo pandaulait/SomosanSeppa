@@ -51,7 +51,8 @@ Rails.application.routes.draw do
     resources :selection_quizzes, only: %i[show update index show]
     resources :categories, only: %i[index create destroy]
     resources :users, only: %i[index update]
-    resources :chat_rooms, only: %i[index show]
-    resources :chats, only: %i[create]
+    resources :chat_rooms, only: %i[index show] do
+      resources :chats, only: %i[create]
+    end
   end
 end

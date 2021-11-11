@@ -2,7 +2,7 @@ class Public::ChatsController < ApplicationController
   def create
     @chat_room = ChatRoom.find(params[:chat][:chat_room_id])
     @chat = @chat_room.chats.new(chats_params)
-    @chat.admin = true if current_user.admin?
+    @chat.admin = false
     @chat.save
     redirect_to chat_rooms_path
   end

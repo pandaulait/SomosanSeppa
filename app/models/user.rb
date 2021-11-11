@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :selection_quizzes, dependent: :destroy
   has_many :results, dependent: :destroy
   has_many :today_results, dependent: :destroy
-  has_many :chat_rooms, dependent: :destroy
+  has_one :chat_room, dependent: :destroy
   has_many :chats, dependent: :destroy
 
   # そのクイズを答えたことがあるか
@@ -43,7 +43,7 @@ class User < ApplicationRecord
     end
     score
   end
-
+  # 経験値取得、レベルに応じてレベルアップ処理
   def get_exp(point)
     exp_point = experience_point
     exp_point += point
@@ -53,5 +53,9 @@ class User < ApplicationRecord
       le += 1
     end
     update(level: le, experience_point: exp_point)
+  end
+  # ユーザーのお問い合わせフォームがあるかどうか
+  def inquired?
+    chat_room.present?
   end
 end
