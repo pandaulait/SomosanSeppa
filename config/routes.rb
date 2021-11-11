@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'chat_rooms/show'
+  end
+  namespace :admin do
+    get 'chat_rooms/index'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions: 'public/devise/sessions',
@@ -36,11 +42,17 @@ Rails.application.routes.draw do
     resources :today_results, only: %i[create index]
     root to: 'homes#top'
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+
+    resources :chat_rooms, only: %i[index create]
+    resources :chats, only: %i[create]
   end
 
   namespace :admin do
     resources :selection_quizzes, only: %i[show update index show]
     resources :categories, only: %i[index create destroy]
     resources :users, only: %i[index update]
+    resources :chat_rooms, only: %i[index show] do
+      resources :chats, only: %i[create]
+    end
   end
 end

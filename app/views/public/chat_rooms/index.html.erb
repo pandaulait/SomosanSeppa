@@ -1,0 +1,10 @@
+<% @chats.each do |chat| %>
+  <%= chat.content %>
+<% end %>
+
+<%= form_with model: @chat, url: chats_path, local: true do |f| %>
+  <%= f.text_field :content %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.hidden_field :chat_room_id %>
+  <%= f.submit %>
+<% end %>

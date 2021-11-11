@@ -1,0 +1,22 @@
+<h1>Admin::ChatRooms#index</h1>
+<p>Find me in app/views/admin/chat_rooms/index.html.erb</p>
+
+
+<table class="table">
+  <thead>
+    <th>name</th>
+    <th>お問い合わせフォーム</th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td>
+          <% if user.inquired? %>
+            <%= link_to 'お問い合わせフォームへ', admin_chat_room_path(user.chat_room.id) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
