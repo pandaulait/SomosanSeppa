@@ -1,11 +1,33 @@
+<h3 class="yusei-magic-l pl-3 pt-3 pb-2 mx-auto"><%= @chat_room.user.name %> 様のお問い合わせ</h3>
 <% @chats.each do |chat| %>
-  <div>
-    <%= chat.user.name %> <%= chat.content %>
-  </div>
+  <% if chat.admin? %>
+    <div class="chat-right">
+      <div class="chat-right-content chat-content">
+        <%= safe_join(chat.content.split("\n"),tag(:br)) %>
+      </div>
+      <div class="chat-right-content-time chat-time"><%= l chat.created_at, format: :short %></div>
+    </div>
+  <% else %>
+    <div class="chat-left">
+      <div class="chat-left-user-box">
+        <% if chat.user.profile_image.attached? %>
+          <%= image_tag chat.user.profile_image, class: "chat-left-user-image"%>
+        <% else %>
+         <%= image_tag 'no_image.jpg', class: "chat-left-user-image" %>
+        <% end %>
+        <%= chat.user.name %>
+      </div>
+      <div class="chat-left-content chat-content">
+        <%= safe_join(chat.content.split("\n"),tag(:br)) %>
+      </div>
+      <div class="chat-left-content-time chat-time"><%= l chat.created_at, format: :short %></div>
+    </div>
+  <% end %>
 <% end %>
 
 <%= form_with model: @chat, url: admin_chat_room_chats_path(@chat_room), local: true do |f| %>
-  <%= f.text_field :content %>
+  <%= f.text_area :content, class: "form-control mt-3" %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
-  <%= f.submit %>
+  <%= f.submit '送信', class: "tsbtn btn-1 mt-1" %>
 <% end %>
+<%= link_to '戻る' ,admin_chat_rooms_path , class: "tsbtn btn-4 mt-5"%>

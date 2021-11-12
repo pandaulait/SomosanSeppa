@@ -1,6 +1,7 @@
 class Public::ChatsController < ApplicationController
+  before_action :authenticate_user!
   def create
-    @chat_room = ChatRoom.find(params[:chat][:chat_room_id])
+    @chat_room = current_user.chat_room
     @chat = @chat_room.chats.new(chats_params)
     @chat.admin = false
     @chat.save

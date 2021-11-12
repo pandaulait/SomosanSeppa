@@ -30,7 +30,10 @@ class Admin::CategoriesController < ApplicationController
   private
 
   def admin_user
-    redirect_to root_path unless current_user.admin?
+    return if current_user.admin?
+
+    flash[:alert] = '管理者権限がありません。'
+    redirect_to root_path
   end
 
   def category_params

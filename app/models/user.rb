@@ -43,17 +43,19 @@ class User < ApplicationRecord
     end
     score
   end
+
   # 経験値取得、レベルに応じてレベルアップ処理
   def get_exp(point)
     exp_point = experience_point
     exp_point += point
     le = level
-    while exp_point >=( le + 2 )
+    while exp_point >= (le + 2)
       exp_point -= (le + 2)
       le += 1
     end
     update(level: le, experience_point: exp_point)
   end
+
   # ユーザーのお問い合わせフォームがあるかどうか
   def inquired?
     chat_room.present?

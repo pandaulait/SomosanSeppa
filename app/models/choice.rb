@@ -31,7 +31,8 @@ class Choice < ApplicationRecord
       while i < choices.count
         if choices[i].present?
           choice = Choice.find(choice_ids[i])
-          all_valid &= choice.update(content: choices[i], is_answer: is_answers[i], selection_quiz_id: selection_quiz_id)
+          all_valid &= choice.update(content: choices[i], is_answer: is_answers[i],
+                                     selection_quiz_id: selection_quiz_id)
         end
         i += 1
         true_count += 1 if is_answers[i] == true
