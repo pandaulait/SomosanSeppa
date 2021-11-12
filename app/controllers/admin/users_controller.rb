@@ -26,6 +26,7 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:is_deleted)
   end
+
   # ゲスト管理者判定
   def ensure_normal_admin
     return if current_user.email != 'admin@example.com'

@@ -18,3 +18,6 @@
 //= require turbolinks
 //= require_tree .
 
+$(document).on("click", ".chat-content", function () {
+  $(this).parent().children(".chat-time").slideToggle();
+});

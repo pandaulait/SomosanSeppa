@@ -10,7 +10,6 @@ class SelectionQuiz < ApplicationRecord
   has_many :today_quizzes, as: :quiz, dependent: :destroy
   has_many :today_results, as: :quiz, dependent: :destroy
 
-
   # クイズが解かれた回数
   def solved_times
     results.count

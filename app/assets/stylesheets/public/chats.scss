@@ -1,3 +1,78 @@
 // Place all the styles related to the public/chats controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$cMain: #4FA5B5;
+$cLightMain: #EDEFF2;
+$cWhite: #FFFFFF;
+$cDarkMain: #2c5c66;
+$cBlueBackground: #EDEFF2;
+$cAnswer: #b54f75;
+$cLightAnswer: #f0dce3;
+$cAdmin: #837bad;
+
+.chat{
+  &-left{
+    &-user{
+      &-image{
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    &-content{
+      margin: 0px auto 10px 20px;
+      padding: 7px 15px;
+      background: white;
+      border-radius: 15px;
+      display: inline-block;
+      overflow-wrap: break-word;
+      max-width: calc(100% - 50px);
+      position: relative;
+      &:before{
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        content: "";
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid white;
+        border-left: 10px solid transparent;
+        transform: rotate(-40deg)
+      }
+      &-time{
+        font-size: 10px;
+        margin: -10px 0px 0px 30px;
+        display: none;
+      }
+    }
+  }
+  &-right{
+    display:flex;
+    flex-flow: column;
+    &-content{
+      margin: 0px 16px 10px auto;
+      padding: 7px 15px;
+      background: $cMain;
+      border-radius: 15px;
+      display: inline-block;
+      overflow-wrap: break-word;
+      max-width: calc(100% - 50px);
+      position: relative;
+      &:before{
+        position: absolute;
+        bottom: -4px;
+        right: -6px;
+        content: "";
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid $cMain;
+        border-left: 10px solid transparent;
+        transform: rotate(120deg)
+      }
+      &-time{
+        font-size: 10px;
+        margin: -10px 30px 0px auto;
+        display: none;
+      }
+    }
+  }
+}

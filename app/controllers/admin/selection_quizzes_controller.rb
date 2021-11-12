@@ -24,6 +24,7 @@ class Admin::SelectionQuizzesController < ApplicationController
   def selection_quiz_params
     params.require(:selection_quiz).permit(:status)
   end
+
   # 管理者ユーザー判定
   def admin_user
     return if current_user.admin?

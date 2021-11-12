@@ -100,7 +100,8 @@ class Public::SelectionQuizzesController < ApplicationController
 
   def ensure_today_quiz
     return unless SelectionQuiz.find(params[:id]).today_quizzes.find_by(content: Date.today).present?
-    return if current_user.email == "pandaulait73@gmail.com"
+    return if current_user.email == 'pandaulait73@gmail.com'
+
     flash[:alert] = '今日の5問に選ばれているため、編集ができません。また後日編集するか、新規作成を行ってください。'
     redirect_to selection_quiz_path(SelectionQuiz.find(params[:id]))
   end

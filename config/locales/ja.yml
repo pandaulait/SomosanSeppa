@@ -11,6 +11,10 @@ ja:
   enums:
     selection_quiz:
       status: # カラム名
-        unauthenticated: '未認証' # enumの値
-        authenticated: '認証済' # enumの値
-        unpublished: '非公開' # enumの値
+        unauthenticated: 未認証
+        authenticated: 認証済
+        unpublished: 非公開
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%m/%d %H:%M"
