@@ -24,9 +24,12 @@ class Admin::SelectionQuizzesController < ApplicationController
   def selection_quiz_params
     params.require(:selection_quiz).permit(:status)
   end
-
+  # 管理者ユーザー判定
   def admin_user
-    redirect_to root_path unless current_user.admin?
+    return if current_user.admin?
+
+    flash[:alert] = '管理者権限がありません。'
+    redirect_to root_path
   end
 
   # ゲスト管理者判定
@@ -34,6 +37,6 @@ class Admin::SelectionQuizzesController < ApplicationController
     return if current_user.email != 'admin@example.com'
 
     flash[:alert] = 'ゲスト管理者権限では、ステータスの変更はできません。'
-    redirect_to request.referer
+    redirect_to root_path
   end
 end

@@ -15,14 +15,18 @@ class Admin::UsersController < ApplicationController
 
   private
 
+  # 管理者ユーザー判定
   def admin_user
-    redirect_to root_path unless current_user.admin?
+    return if current_user.admin?
+
+    flash[:alert] = '管理者権限がありません。'
+    redirect_to root_path
   end
 
   def user_params
     params.require(:user).permit(:is_deleted)
   end
-
+  # ゲスト管理者判定
   def ensure_normal_admin
     return if current_user.email != 'admin@example.com'
 
