@@ -62,7 +62,7 @@ ver 2.0　追加予定機能
 | 外部リンクへ遷移する際、アラートを出す。                                     | ○                       | ○                  | 
 ## ER図
 ver 2.0
-![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/84437188/140896526-796602b8-e96a-4f84-b459-b639ce1ae8ac.png)
+![Untitled Diagram drawio (5)](https://user-images.githubusercontent.com/84437188/141799081-aeecf158-0e97-45f3-b226-7c328e4aeca3.png)
 (ver 1.0)
 ![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/84437188/140520645-847247ae-0f1b-4db3-a5bc-a9f8ec0630e1.png)
 
