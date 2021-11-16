@@ -8,7 +8,7 @@ class Admin::ChatsController < ApplicationController
     @chat = @chat_room.chats.new(chats_params)
     @chat.admin = true
     @chat.save
-    redirect_to admin_chat_room_path(@chat_room, anchor: "chat_room-bottom")
+    redirect_to admin_chat_room_path(@chat_room, anchor: 'chat_room-bottom')
   end
 
   private

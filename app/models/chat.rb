@@ -18,5 +18,4 @@ class Chat < ApplicationRecord
       Activity.create!(subject: self, content: chat_room.user.name, user: user, action_type: :chatted_by_user)
     end
   end
-
 end

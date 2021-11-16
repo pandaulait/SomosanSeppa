@@ -58,28 +58,27 @@ class User < ApplicationRecord
       level_up_flag = 1
     end
     update(level: le, experience_point: exp_point)
-    if level_up_flag == 1
-      create_activities
-    end
+    create_activities if level_up_flag == 1
   end
 
   # ユーザーのお問い合わせフォームがあるかどうか
   def inquired?
     chat_room.present?
   end
+
   # 通知の未読の数
   def unread_activities
     activities.where(read: false)
   end
+
   # ユーザーのレベル通知を既読にする
   def all_read_leveled_up
-    ua_level = unread_activities.where(action_type: "leveled_up")
-    if ua_level.present?
-      ua_level.update_all(read: true)
-    end
+    ua_level = unread_activities.where(action_type: 'leveled_up')
+    ua_level.update_all(read: true) if ua_level.present?
   end
 
   private
+
   def create_activities
     Activity.create!(subject: self, content: level, user_id: id, action_type: :leveled_up)
   end

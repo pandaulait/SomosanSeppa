@@ -3,12 +3,12 @@ class Admin::ChatRoomsController < ApplicationController
   before_action :admin_user
   before_action :ensure_normal_admin, only: [:show]
   layout 'admin'
-  
+
   def index
     # ユーザーとのお問い合わせ一覧
     @users = User.all
   end
-  
+
   def show
     # お問い合わせページ
     @chat_room = ChatRoom.find(params[:id])
