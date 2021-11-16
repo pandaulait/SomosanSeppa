@@ -1,3 +1,42 @@
 // Place all the styles related to the public/activities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$cMain: #4FA5B5;
+$cLightMain: #EDEFF2;
+$cWhite: #FFFFFF;
+$cDarkMain: #2c5c66;
+$cBlueBackground: #EDEFF2;
+$cAnswer: #b54f75;
+$cLightAnswer: #f0dce3;
+$cAdmin: #837bad;
+
+.activity{
+  &_link{
+    text-decoration: none;
+    color: black;
+    // margin: 1rem;
+    padding: 0.5rem 2rem;
+    line-height: 2rem;
+    display: inline-block;
+    width: 100%;
+    &:hover{
+      text-decoration: none;
+      color: $cMain;
+      background: white;
+    }
+  }
+  &_true{
+    background: $cLightMain;
+  }
+  &_false{
+    background: #edf6f8;
+  }
+  &_badge{
+    font-size: 0.8rem;
+    display: inline-block;
+    background: $cMain;
+    color: white;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+  }
+}

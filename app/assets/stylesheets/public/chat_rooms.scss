@@ -1,3 +1,33 @@
 // Place all the styles related to the public/chat_rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$cMain: #4FA5B5;
+$cLightMain: #EDEFF2;
+$cWhite: #FFFFFF;
+$cDarkMain: #2c5c66;
+$cBlueBackground: #EDEFF2;
+$cAnswer: #b54f75;
+$cLightAnswer: #f0dce3;
+$cAdmin: #837bad;
+
+.chat_room-unread{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: $cMain;
+  &:before{
+    content: "";
+    border-top: 1px solid $cMain;
+
+    width: 20px;
+    margin-right: 10px;
+  }
+  &:after {
+    content: "";
+    border-top: 1px solid $cMain;
+
+    width: 20px;
+    margin-left: 10px;
+  }
+}

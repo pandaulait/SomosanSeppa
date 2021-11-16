@@ -1,14 +1,13 @@
 <span class="yusei-magic-l pl-3 pt-3 mx-auto ">通知一覧</span>
-<%= link_to '通知を既読にする', activities_read_path %>
+<%= link_to '通知を全て既読にする', activities_read_path, class: "sbtn btn-1" %>
 <% if @activities.present? %>
-  <table>
+  <table class="table">
     <tbody>
       <% @activities.each do |activity| %>
       <tr>
-      <td>
-        <%= link_to transition_path(activity) do %>
+      <td class="p-0">
+        <%= link_to transition_path(activity) , class: "activity_link activity_#{activity.read}" do %>
           <%= render "public/activities/#{activity.action_type}", activity: activity%>
-          <%= activity.read %>
         <% end %>
       </td></tr>
       <% end %>
@@ -18,4 +17,3 @@
   <p>通知はございません。</p>
 <% end %>
 
-<%= link_to activities_read_path %>
