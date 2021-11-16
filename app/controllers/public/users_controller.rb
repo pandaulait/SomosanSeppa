@@ -4,6 +4,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_normal_user, only: [:update]
   def show
     @user = User.find(params[:id])
+    @user.all_read_level
   end
 
   def edit

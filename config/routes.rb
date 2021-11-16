@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :chat_rooms, only: %i[index create]
     resources :chats, only: %i[create]
     resources :activities, only: %i[index]
+    get 'activities/read', to: 'activities#read'
   end
 
   namespace :admin do

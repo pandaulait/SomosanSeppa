@@ -67,6 +67,17 @@ class User < ApplicationRecord
   def inquired?
     chat_room.present?
   end
+  # 通知の未読の数
+  def unread_activities
+    activities.where(read: false)
+  end
+  # ユーザーのレベル通知を既読にする
+  def all_read_
+    ua_level = unread_activities.where(action_type: "leveled_up")
+    if ua_level.present?
+      ua_level.update_all(read: true)
+    end
+  end
 
   private
   def create_activities

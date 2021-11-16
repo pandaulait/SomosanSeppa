@@ -1,5 +1,8 @@
 <h3 class="yusei-magic-l pl-3 pt-3 pb-2 mx-auto">お問い合わせフォーム</h3>
 <% @chats.each do |chat| %>
+  <% if chat.id == @all_read_number %>
+    ここから未読
+  <% end %>
   <% if chat.admin? %>
     <div class="chat-left">
       <div class="chat-left-user-box">
