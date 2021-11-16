@@ -72,7 +72,7 @@ class User < ApplicationRecord
     activities.where(read: false)
   end
   # ユーザーのレベル通知を既読にする
-  def all_read_
+  def all_read_leveled_up
     ua_level = unread_activities.where(action_type: "leveled_up")
     if ua_level.present?
       ua_level.update_all(read: true)
