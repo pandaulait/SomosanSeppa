@@ -5,7 +5,7 @@ class Public::ChatsController < ApplicationController
     @chat = @chat_room.chats.new(chats_params)
     @chat.admin = false
     @chat.save
-    redirect_to chat_rooms_path
+    redirect_to chat_rooms_path(anchor: 'chat_room-bottom')
   end
 
   def chats_params

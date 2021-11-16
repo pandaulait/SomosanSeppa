@@ -9,7 +9,7 @@
         <td><%= user.name %></td>
         <td>
           <% if user.inquired? %>
-            <%= link_to 'お問い合わせフォームへ', admin_chat_room_path(user.chat_room.id) %>
+            <%= link_to 'お問い合わせフォームへ', admin_chat_room_path(user.chat_room.id,anchor: "chat_room-bottom") %>
           <% end %>
         </td>
       </tr>

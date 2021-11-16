@@ -3,6 +3,7 @@ class Admin::ChatRoomsController < ApplicationController
   before_action :admin_user
   before_action :ensure_normal_admin, only: [:show]
   layout 'admin'
+
   def index
     # ユーザーとのお問い合わせ一覧
     @users = User.all
@@ -13,6 +14,7 @@ class Admin::ChatRoomsController < ApplicationController
     @chat_room = ChatRoom.find(params[:id])
     @chats = @chat_room.chats
     @chat = Chat.new
+    @all_read_number = @chat_room.all_read_chatted_by_user
   end
 
   private

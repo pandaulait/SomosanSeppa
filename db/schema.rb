@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_211_110_142_155) do
+ActiveRecord::Schema.define(version: 20_211_115_143_942) do
   create_table 'active_storage_attachments', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(version: 20_211_110_142_155) do
     t.string 'checksum', null: false
     t.datetime 'created_at', null: false
     t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
+  end
+
+  create_table 'activities', force: :cascade do |t|
+    t.string 'subject_type'
+    t.integer 'subject_id'
+    t.integer 'user_id'
+    t.string 'content', default: '', null: false
+    t.integer 'action_type', null: false
+    t.boolean 'read', default: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[subject_type subject_id], name: 'index_activities_on_subject_type_and_subject_id'
+    t.index ['user_id'], name: 'index_activities_on_user_id'
   end
 
   create_table 'categories', force: :cascade do |t|

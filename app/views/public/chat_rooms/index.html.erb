@@ -1,5 +1,8 @@
 <h3 class="yusei-magic-l pl-3 pt-3 pb-2 mx-auto">お問い合わせフォーム</h3>
 <% @chats.each do |chat| %>
+  <% if chat.id == @all_read_number %>
+    <h4 class="chat_room-unread">ここから未読</h4>
+  <% end %>
   <% if chat.admin? %>
     <div class="chat-left">
       <div class="chat-left-user-box">
@@ -10,25 +13,24 @@
         <% end %>
         <%= chat.user.name %>(サイト運営)
       </div>
-      <div class="chat-left-content chat-content">
+      <div class="chat-left-content chat-content" id="chat-<%=chat.id%>">
         <%= safe_join(chat.content.split("\n"),tag(:br)) %>
       </div>
       <div class="chat-left-content-time chat-time"><%= l chat.created_at, format: :short %></div>
     </div>
   <% else %>
-  <div class="chat-right">
-    <div class="chat-right-content chat-content">
-      <%= safe_join(chat.content.split("\n"),tag(:br)) %>
+    <div class="chat-right">
+      <div class="chat-right-content chat-content" id="chat-<%=chat.id%>">
+        <%= safe_join(chat.content.split("\n"),tag(:br)) %>
+      </div>
+      <div class="chat-right-content-time chat-time"><%= l chat.created_at, format: :short %></div>
     </div>
-    <div class="chat-right-content-time chat-time"><%= l chat.created_at, format: :short %></div>
-  </div>
-
   <% end %>
 
 <% end %>
 
 <%= form_with model: @chat, url: chats_path, local: true do |f| %>
-  <%= f.text_area :content, class: "form-control mt-3" %>
+  <%= f.text_area :content, class: "form-control mt-3", id: "chat_room-bottom"%>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <%= f.hidden_field :chat_room_id %>
   <%= f.submit '送信', class: "tsbtn btn-1 mt-1" %>
