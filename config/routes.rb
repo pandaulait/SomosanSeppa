@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'chat_rooms/show'
-  end
-  namespace :admin do
-    get 'chat_rooms/index'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions: 'public/devise/sessions',
@@ -45,6 +39,7 @@ Rails.application.routes.draw do
 
     resources :chat_rooms, only: %i[index create]
     resources :chats, only: %i[create]
+    resources :activities, only: %i[index]
   end
 
   namespace :admin do

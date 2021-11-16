@@ -16,13 +16,12 @@
       <div class="chat-left-content-time chat-time"><%= l chat.created_at, format: :short %></div>
     </div>
   <% else %>
-  <div class="chat-right">
-    <div class="chat-right-content chat-content">
-      <%= safe_join(chat.content.split("\n"),tag(:br)) %>
+    <div class="chat-right">
+      <div class="chat-right-content chat-content">
+        <%= safe_join(chat.content.split("\n"),tag(:br)) %>
+      </div>
+      <div class="chat-right-content-time chat-time"><%= l chat.created_at, format: :short %></div>
     </div>
-    <div class="chat-right-content-time chat-time"><%= l chat.created_at, format: :short %></div>
-  </div>
-
   <% end %>
 
 <% end %>

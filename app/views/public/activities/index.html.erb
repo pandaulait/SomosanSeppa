@@ -1,0 +1,16 @@
+<h1>Public::Activities#index</h1>
+<p>Find me in app/views/public/activities/index.html.erb</p>
+<% if @activities.present? %>
+  <table>
+    <tbody>
+      <% @activities.each do |activity| %>
+      <tr>
+      <td>
+        <%= link_to transition_path(activity) do %>
+          <%= render "public/activities/#{activity.action_type}", activity: activity%>
+        <% end %>
+      </td></tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

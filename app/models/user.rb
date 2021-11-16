@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :today_results, dependent: :destroy
   has_one :chat_room, dependent: :destroy
   has_many :chats, dependent: :destroy
+  has_many :activities, dependent: :destroy
+  has_one :activity, as: :subject, dependent: :destroy
 
   # そのクイズを答えたことがあるか
   def answered?(quiz)
@@ -49,15 +51,25 @@ class User < ApplicationRecord
     exp_point = experience_point
     exp_point += point
     le = level
+    level_up_flag = 0
     while exp_point >= (le + 2)
       exp_point -= (le + 2)
       le += 1
+      level_up_flag = 1
     end
     update(level: le, experience_point: exp_point)
+    if level_up_flag == 1
+      create_activities
+    end
   end
 
   # ユーザーのお問い合わせフォームがあるかどうか
   def inquired?
     chat_room.present?
+  end
+
+  private
+  def create_activities
+    Activity.create!(subject: self, content: level, user_id: id, action_type: :leveled_up)
   end
 end

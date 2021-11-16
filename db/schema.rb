@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_143942) do
     t.string "subject_type"
     t.integer "subject_id"
     t.integer "user_id"
+    t.string "content", default: "", null: false
     t.integer "action_type", null: false
     t.boolean "read", default: false
     t.datetime "created_at", null: false

@@ -12,10 +12,10 @@ class Chat < ApplicationRecord
 
   def create_activities
     if admin == true
-      Activity.create!(subject: self, user: chat_room.user, action_type: :chatted_by_admin)
+      Activity.create!(subject: self, content: user.name, user: chat_room.user, action_type: :chatted_by_admin)
     else
       user = User.find_by(email: ENV['ADMIN_EMAIL'])
-      Activity.create!(subject: self, user: user, action_type: :chatted_by_user)
+      Activity.create!(subject: self, content: chat_room.user.name, user: user, action_type: :chatted_by_user)
     end
   end
 
