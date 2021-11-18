@@ -6,11 +6,11 @@
 </br>
 <!--解説の表示-->
 <span class="yusei-magic-l pl-3 pt-3 mx-auto">解説</span>
-<div class="quiz-explanation">
+<div class="quiz-explanation my-3">
   <%= text_url_to_link(h(safe_join(quiz.explanation.split("\n"),tag(:br)))).html_safe %>
 </div>
 <!--問題の表示-->
-<span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
+<span class="yusei-magic-l pl-3 pt-3 mx-auto mt-2">問題　</span>
 <span class="yusei-magic">(作:</span>
 <%= render 'public/users/quiz_author_icon' ,quiz: quiz %>
 <span class="yusei-magic"><%= quiz.user.name %> さん)</span>

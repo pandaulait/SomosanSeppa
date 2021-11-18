@@ -9,8 +9,10 @@
   <% end %>
 </div>
 <span class="yusei-magic-l pl-3 pt-3 mx-auto">回答欄</span>
-<%= form_with model: @result, url: selection_quiz_results_path(@quiz), local: true do |f| %>
+<%= form_with model: @result, url: descriptive_quiz_results_path(@quiz), local: true do |f| %>
   <%= f.text_field :answer, class: "form-control" %>
+  <%= f.hidden_field :quiz_type %>
+  <%= f.hidden_field :quiz_id %>
   <%= f.submit '回答する', class: "mr-2 ml-auto mbtn btn-1" %>
 <% end %>
 

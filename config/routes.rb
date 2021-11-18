@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions: 'public/devise/sessions',
@@ -31,8 +30,11 @@ Rails.application.routes.draw do
       # get '/answer' => 'results#answer', as: 'answer'
       resources :choices, only: %i[new destroy create]
     end
-    patch 'descriptive_quiz_image_destroy/:id' => 'descriptive_quizzes#image_desttroy', as: 'descriptive_quiz_image_destroy'
-    resources :descriptive_quizzes
+    patch 'descriptive_quiz_image_destroy/:id' => 'descriptive_quizzes#image_desttroy',
+          as: 'descriptive_quiz_image_destroy'
+    resources :descriptive_quizzes do
+      resources :results, only: %i[create show]
+    end
 
     get 'today_quizzes/somosan', to: 'today_quizzes#somosan'
     get 'today_quizzes/seppa' => 'today_quizzes#seppa'

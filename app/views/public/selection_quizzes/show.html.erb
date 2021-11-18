@@ -20,6 +20,9 @@
       <%= choice.content %>
     </div>
   <% end %>
+  <%= f.hidden_field :quiz_type %>
+  <%= f.hidden_field :quiz_id %>
+
   <%= f.submit '回答する', class: "mr-2 ml-auto mbtn btn-1" %>
 <% end %>
 
