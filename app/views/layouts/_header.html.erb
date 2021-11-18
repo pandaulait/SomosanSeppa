@@ -14,7 +14,11 @@
           <%= link_to 'マイページ', user_path(current_user.id) , class: "nav-link active"%>
         </li>
         <li class="nav-item">
-          <%= link_to 'クイズ新規作成', new_selection_quiz_path , class: "nav-link active"%>
+          <% if current_user.reach_phase?(1) %>
+            <%= link_to 'クイズ新規作成', new_selection_quiz_path , class: "nav-link active"%>
+          <% else %>
+            <%= link_to 'クイズ新規作成', new_selection_quiz_path , class: "nav-link active text-light"%>
+          <% end %>
         </li>
         <li class="nav-item">
           <%= link_to 'クイズ一覧', selection_quizzes_path, class: "nav-link active" %>

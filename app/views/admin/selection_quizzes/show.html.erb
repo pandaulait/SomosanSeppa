@@ -9,6 +9,9 @@
 <h4 class="yusei-magic pl-3 pt-3 mx-auto">問題</h4>
 <div class="quiz-content mb-3">
   <%= safe_join(@quiz.content.split("\n"),tag(:br)) %>
+  <% if @quiz.image.attached? %>
+    <%= image_tag @quiz.image ,class: "quiz-content-image mt-2"%>
+  <% end %>
 </div>
 <% i = 0 %>
 <% @quiz.choices.each do |choice| %>

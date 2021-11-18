@@ -3,6 +3,7 @@ class Public::SelectionQuizzesController < ApplicationController
   before_action :ensure_correct_user, only: %i[edit update]
   before_action :ensure_normal_admin, only: [:update]
   before_action :ensure_today_quiz, only: %i[edit update]
+  before_action :reach_phase1, only: %i[new create edit update]
 
   def show
     @quiz = SelectionQuiz.find(params[:id])
@@ -23,6 +24,7 @@ class Public::SelectionQuizzesController < ApplicationController
   def create
     @quiz = SelectionQuiz.new(selection_quiz_params)
     @quiz.user_id = current_user.id
+    @quiz.image = params[:selection_quiz][:image] if current_user.reach_phase?(1)
     # クイズを保存したのち、選択肢も保存し、エラーが発生した場合ロールバック
     SelectionQuiz.transaction(joinable: false, requires_new: true) do
       if @quiz.save
@@ -53,6 +55,7 @@ class Public::SelectionQuizzesController < ApplicationController
     @choices = @quiz.choices
     # クイズを更新したのち、選択肢も更新し、エラーが発生した場合ロールバック
     @quiz.status = 'unauthenticated' if @quiz.status == 'authenticated'
+    @quiz.image = params[:selection_quiz][:image] if current_user.reach_phase?(1)
     if @quiz.update(selection_quiz_params)
       choices = params[:selection_quiz][:choices]
       @is_answers = params[:selection_quiz][:choice][:is_answer]
@@ -69,10 +72,19 @@ class Public::SelectionQuizzesController < ApplicationController
     end
   end
 
+  # とりえず一問　そもさん
   def random_select; end
 
+  # とりえず一問　せっぱ
   def seppa
     @quiz = SelectionQuiz.randomly_selected(current_user)
+  end
+
+  # 画像のpurge
+  def image_desttroy
+    quiz = SelectionQuiz.find(params[:id])
+    quiz.image.purge
+    redirect_to edit_selection_quiz_path(quiz)
   end
 
   private
@@ -98,6 +110,7 @@ class Public::SelectionQuizzesController < ApplicationController
     redirect_to selection_quiz_path(SelectionQuiz.find(params[:id]))
   end
 
+  # その問いが今日の5問に選ばれているかどうか。選ばれていればリダイレクト
   def ensure_today_quiz
     return unless SelectionQuiz.find(params[:id]).today_quizzes.find_by(content: Date.today).present?
     return if current_user.email == 'pandaulait73@gmail.com'
@@ -105,7 +118,12 @@ class Public::SelectionQuizzesController < ApplicationController
     flash[:alert] = '今日の5問に選ばれているため、編集ができません。また後日編集するか、新規作成を行ってください。'
     redirect_to selection_quiz_path(SelectionQuiz.find(params[:id]))
   end
-  # def quiz_params
-  #   params.require(:quiz).permit(:choice, :explanation)
-  # end
+
+  # phase1に到達しているかどうか
+  def reach_phase1
+    return if current_user.reach_phase?(1)
+
+    flash[:alert] = 'クイズ新規作成が行えるのはレベルが5以上になってからです。たくさんクイズを解きましょう。'
+    redirect_to root_path
+  end
 end
