@@ -35,7 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.boolean :is_deleted, null: false, default: false
       t.boolean :admin, null: false, default: false
       t.integer :today_status, null: false, default: 0
-      t.integer :expe, null: false, default: 0
+      t.integer :exp, null: false, default: 0
       t.integer :level, null: false, default: 1
 
       t.timestamps null: false

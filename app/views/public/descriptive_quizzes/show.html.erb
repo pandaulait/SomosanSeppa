@@ -1,4 +1,5 @@
-<!--問題の表示-->
+<h1>Public::DescriptiveQuizzes#show</h1>
+<p>Find me in app/views/public/descriptive_quizzes/show.html.erb</p>
 <span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
 <span class="yusei-magic">(作:</span>
 <%= render 'public/users/quiz_author_icon' ,quiz: @quiz %>
@@ -9,21 +10,12 @@
     <%= image_tag @quiz.image ,class: "quiz-content-image"%>
   <% end %>
 </div>
-
-<!--選択肢の表示-->
-<span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
-<span class="yusei-magic">(模範回答は1つ以上)</span>
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">回答欄</span>
 <%= form_with model: @result, url: selection_quiz_results_path(@quiz), local: true do |f| %>
-  <% @choices.each do |choice| %>
-    <div class="quiz-choice">
-      <%= f.check_box :answer ,{multiple: true, class: "mx-2 my-auto"} %>
-      <%= choice.content %>
-    </div>
-  <% end %>
+  <%= f.text_field :answer, class: "form-control" %>
   <%= f.submit '回答する', class: "mr-2 ml-auto mbtn btn-1" %>
 <% end %>
 
 <% if current_user.id == @quiz.user.id %>
-  <%= link_to '編集', edit_selection_quiz_path(@quiz) %>
+  <%= link_to '編集', edit_descriptive_quiz_path(@quiz) %>
 <% end %>
-

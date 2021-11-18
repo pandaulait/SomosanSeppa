@@ -37,7 +37,7 @@ class Public::SelectionQuizzesController < ApplicationController
             redirect_to selection_quiz_path(@quiz)
           end
         else
-          flash.now[:alert] = '更新に失敗しました。正解の選択肢にチェックはついていますか。'
+          flash.now[:alert] = '保存に失敗しました。正解の選択肢にチェックはついていますか。'
           raise ActiveRecord::Rollback
         end
       end

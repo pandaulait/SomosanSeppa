@@ -1,0 +1,20 @@
+<%= form_with model: @quiz, url: descriptive_quizzes_path, remote: true do |f| %>
+  <h4 class="yusei-magic pl-3 pt-3 mx-auto">クイズ新規作成</h4>
+  <div class="quiz-content my-2">
+    <!--クイズ本文-->
+    <span class="yusei-magic-l pl-3 pt-3 mx-auto">問題</span>
+    <%= f.text_area :content , :placeholder => "問題文を書こう(10〜200文字)\n(例)「そもさん」とは、どう言う意味？", class: "form-control mb-4 quiz-content-textarea" %>
+    <span class="quiz_content-error"><%= render 'layouts/error_messages', obj: @quiz, column: :content %></span>
+    <!--レベルがフェーズ2に達していたら画像編集ページを表示-->
+    <% if current_user.reach_phase?(2) %>
+      <span class="yusei-magic">添付画像を下記の画像に設定する。</span><br>
+      <%= f.file_field :image %>
+    <% end %>
+  </div>
+
+  <span class="yusei-magic-l pl-3 mt-3">解説・意図</span>
+  <%= f.text_area :explanation , :placeholder => "解説(0〜500文字)\n(例)「そもさん」とは、主に禅問答の際にかける言葉で、問題を出題する側が用いる表現。「さあどうだ」といった意味合いである。「そもさん」に対し、問題を出題される側は、「せっぱ（説破）」と応えるのが一般的である。",class: "form-control mb-3 quiz-explaination-textarea"%>
+  <span class="quiz_explanation-error"><%= render 'layouts/error_messages', obj: @quiz, column: :explanation %></span>
+
+  <%= f.submit '保存', class: "btn btn-light"%>
+<% end %>
