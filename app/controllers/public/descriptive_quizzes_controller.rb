@@ -24,6 +24,23 @@ class Public::DescriptiveQuizzesController < ApplicationController
   end
 
   def edit
+    @quiz = DescriptiveQuiz.find(params[:id])
+  end
+
+  def update
+    @quiz = DescriptiveQuiz.find(params[:id])
+    @quiz.status = 'unauthenticated' if @quiz.status == 'authenticated'
+    if @quiz.update(descriptive_quizzes_params)
+      redirect_to descriptive_quiz_path(@quiz)
+    else
+      flash.now[:alert] = "更新に失敗しました。"
+    end
+  end
+
+  def image_desttroy
+    quiz = DescriptiveQuiz.find(params[:id])
+    quiz.image.purge
+    redirect_to edit_descriptive_quiz_path(quiz)
   end
 
 

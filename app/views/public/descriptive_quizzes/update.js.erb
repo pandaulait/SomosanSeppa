@@ -1,0 +1,3 @@
+$('.quiz_content-error').html('<%= j(render 'layouts/error_messages', obj: @quiz, column: :content) %>');
+$('.quiz_explanation-error').html('<%= j(render 'layouts/error_messages', obj: @quiz, column: :explanation) %>');
+$('.flash').html('<%= j(render 'layouts/flash' )%>');

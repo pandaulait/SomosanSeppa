@@ -1,2 +1,25 @@
-<h1>Public::DescriptiveQuizzes#edit</h1>
-<p>Find me in app/views/public/descriptive_quizzes/edit.html.erb</p>
+<%= form_with model: @quiz, url: descriptive_quiz_path(@quiz), remote: true do |f| %>
+  <!--問題文の編集area-->
+  <span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
+  <span class="yusei-magic">(作:</span>
+  <%= render 'public/users/quiz_author_icon' ,quiz: @quiz %>
+  <span class="yusei-magic"><%= @quiz.user.name %> さん)</span>
+  <div class="quiz-content mt-2">
+    <%= f.text_area :content, class: "form-control quiz-content-textarea mt-2" %>
+    <span class="quiz_content-error"><%= render 'layouts/error_messages', obj: @quiz, column: :content %></span>
+    <% if @quiz.image.attached? %>
+      <%= image_tag @quiz.image ,class: "quiz-content-image mt-2"%>
+      <%= link_to '画像を削除する', descriptive_quiz_image_destroy_path(@quiz) , method: :patch, class: "sbtn btn-4"%>
+    <% end %>
+    <% if current_user.reach_phase?(2) %>
+      <span class="yusei-magic">添付画像を下記の画像に設定する。</span><br>
+      <%= f.file_field :image, class: "my-3"%>
+    <% end %><br>
+  </div>
+  <!--解説の編集エリア-->
+  <h4 class="yusei-magic pl-3 pt-3">解説</h4>
+  <%= f.text_area :explanation, class: "form-control quiz-explaination-textarea" %>
+  <span class="quiz_explanation-error"><%= render 'layouts/error_messages', obj: @quiz, column: :explanation %></span>
+
+  <%= f.submit '保存', class: "ml-auto mr-2 mbtn btn-1" %>
+<% end %>
