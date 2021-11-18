@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :name,     presence: true, length: { in: 3..200 }
   has_one_attached :profile_image
   has_many :selection_quizzes, dependent: :destroy
+  has_many :descriptive_quizzes, dependent: :destroy
   has_many :results, dependent: :destroy
   has_many :today_results, dependent: :destroy
   has_one :chat_room, dependent: :destroy

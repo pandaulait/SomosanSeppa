@@ -1,16 +1,23 @@
 ja:
   activerecord:
     models:
-      selection_quiz: クイズ
+      selection_quiz: 選択クイズ
     attributes:
       selection_quiz:
         content: 問題文
         user_id: 作者
         explanation: 説明
         status: 認証ステータス
+      descriptive_quiz: 記述式クイズ
+    attributes:
+      descriptive_quiz:
+        content: 問題文
+        user_id: 作者
+        explanation: 説明
+        status: 認証ステータス
   enums:
     selection_quiz:
-      status: # カラム名
+      status:
         unauthenticated: 未認証
         authenticated: 認証済
         unpublished: 非公開

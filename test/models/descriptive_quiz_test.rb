@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Public::QuizzesControllerTest < ActionDispatch::IntegrationTest
+class DescriptiveQuizTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

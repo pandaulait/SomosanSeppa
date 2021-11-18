@@ -22,13 +22,18 @@ Rails.application.routes.draw do
     resources :users, only: %i[show edit update] do
       resources :results, only: [:index]
     end
-    get 'selection_quizzes/random_select', to: 'selection_quizzes#random_select'
-    get 'selection_quizzes/seppa', to: 'selection_quizzes#seppa'
+    get 'quizzes/somosan', to: 'quizzes#somosan'
+    get 'quizzes/seppa', to: 'quizzes#seppa'
     patch 'selection_quiz_image_destroy/:id' => 'selection_quizzes#image_desttroy', as: 'selection_quiz_image_destroy'
     resources :selection_quizzes do
       resources :results, only: %i[create show]
       # get '/answer' => 'results#answer', as: 'answer'
       resources :choices, only: %i[new destroy create]
+    end
+    patch 'descriptive_quiz_image_destroy/:id' => 'descriptive_quizzes#image_desttroy',
+          as: 'descriptive_quiz_image_destroy'
+    resources :descriptive_quizzes do
+      resources :results, only: %i[create show]
     end
 
     get 'today_quizzes/somosan', to: 'today_quizzes#somosan'

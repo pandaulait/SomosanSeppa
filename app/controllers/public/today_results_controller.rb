@@ -7,39 +7,63 @@ class Public::TodayResultsController < ApplicationController
   end
 
   def create
-    @answers = normalize(params[:today_result][:answer])
-    today_quiz = TodayQuiz.where(content: Date.today)[current_user.today_status]
-    @quiz = today_quiz.quiz
-    @today_result = TodayResult.new
-    @choices = @quiz.choices
+    today_result = TodayResult.new(today_result_params)
+    today_result.user_id = current_user.id
+    quiz = today_result.quiz
 
-    i = 0
-    all_correct = true
-    correct_count = 0
-    @choices.each do |choice|
-      if choice.is_answer == @answers[i]
-        correct_count += 1
+    today_quiz = quiz.today_quizzes.find_by(content: Date.today)
+    today_result.today_quiz_id = today_quiz.id
+
+    case today_result.quiz_type
+    # SelectionQuiz 解答作成
+    when 'SelectionQuiz'
+      answers = normalize(params[:today_result][:answer])
+      if TodayResult.selection_quiz_save(answers, today_result)
+        @today_result = today_quiz.today_results.find_by(user_id: current_user.id)
+        status = current_user.today_status + 1
+        current_user.update(today_status: status)
+        today_quiz.update(challenger: today_quiz.challenger + 1)
+        today_quiz.update(correct_answerer: today_quiz.correct_answerer + 1) if @today_result.content
+        current_user.get_exp(5)
+        redirect_to today_quizzes_path
       else
-        all_correct = false
+        redirect_to root_path
       end
-      i += 1
+    when 'DescriptiveQuiz'
+      answer = params[:today_result][:answer]
+      if TodayResult.descriptive_quiz_save(answer, today_result)
+        @today_result = today_quiz.today_results.find_by(user_id: current_user.id)
+        status = current_user.today_status + 1
+        current_user.update(today_status: status)
+        today_quiz.update(challenger: today_quiz.challenger + 1)
+        today_quiz.update(correct_answerer: today_quiz.correct_answerer + 1) if @today_result.content
+        current_user.get_exp(5)
+        redirect_to today_quizzes_path
+      else
+        redirect_to root_path
+      end
     end
-    @today_result = TodayResult.new(user_id: current_user.id, quiz_id: @quiz.id, quiz_type: @quiz.class, today_quiz_id: today_quiz.id,
-                                    content: all_correct, correct_count: correct_count, answer: @answers.join(' '))
-
-    if @today_result.save
-      status = current_user.today_status + 1
-      current_user.update(today_status: status)
-      today_quiz.update(challenger: today_quiz.challenger + 1)
-      today_quiz.update(correct_answerer: today_quiz.correct_answerer + 1) if all_correct
-      current_user.get_exp(5)
-      redirect_to today_quizzes_path
-    else
-      redirect_to root_path
-    end
+    # @choices = @quiz.choices
+    # i = 0
+    # all_correct = true
+    # correct_count = 0
+    # @choices.each do |choice|
+    #   if choice.is_answer == @answers[i]
+    #     correct_count += 1
+    #   else
+    #     all_correct = false
+    #   end
+    #   i += 1
+    # end
+    # @today_result = TodayResult.new(user_id: current_user.id, quiz_id: @quiz.id, quiz_type: @quiz.class, today_quiz_id: today_quiz.id,
+    #                                 content: all_correct, correct_count: correct_count, answer: @answers.join(' '))
   end
 
   private
+
+  def today_result_params
+    params.require(:today_result).permit(:quiz_id, :quiz_type)
+  end
 
   # 解答の正規化
   def normalize(array)

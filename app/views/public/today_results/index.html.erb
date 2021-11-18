@@ -3,7 +3,12 @@
 <% @today_quizzes.each do |tq| %>
   <% j = (tq.correct_answerer.to_f / tq.challenger.to_f)*100 %>
   <h2 class="yusei-magic mb-2 mt-5">第 <%= i %> 問<span class="yusei-magic-l">　(正答率<%= j.to_i %>%)</span></h2>
-  <%= render 'public/results/show' ,{result: tq.today_results.find_by(user_id: current_user.id), quiz: tq.quiz} %>
+  <% case tq.quiz_type %>
+  <% when "SelectionQuiz" then %>
+    <%= render 'public/results/sq_show',{ quiz: tq.quiz, result: tq.today_results.find_by(user_id: current_user.id)} %>
+  <% when "DescriptiveQuiz" then %>
+    <%= render 'public/results/dq_show',{ quiz: tq.quiz, result: tq.today_results.find_by(user_id: current_user.id)} %>
+  <% end %>
   <% i+= 1 %>
 
 <% end %>

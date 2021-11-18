@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_211_115_143_942) do
+ActiveRecord::Schema.define(version: 20_211_118_065_333) do
   create_table 'active_storage_attachments', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 20_211_115_143_942) do
     t.datetime 'updated_at', null: false
   end
 
+  create_table 'descriptive_quizzes', force: :cascade do |t|
+    t.integer 'user_id'
+    t.text 'content', null: false
+    t.text 'explanation', null: false
+    t.integer 'status', default: 0, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_descriptive_quizzes_on_user_id'
+  end
+
   create_table 'results', force: :cascade do |t|
     t.integer 'user_id'
     t.string 'quiz_type'
@@ -95,7 +105,7 @@ ActiveRecord::Schema.define(version: 20_211_115_143_942) do
   create_table 'selection_quizzes', force: :cascade do |t|
     t.integer 'user_id'
     t.text 'content', null: false
-    t.text 'explanation', null: false
+    t.text 'explanation', default: '', null: false
     t.integer 'status', default: 0, null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false

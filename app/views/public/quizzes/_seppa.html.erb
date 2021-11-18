@@ -1,0 +1,19 @@
+<div class="d-flex">
+  <%= image_tag 'somosan0.png', class: "top-icon mx-auto fade2" %>
+</div>
+
+<script>
+  setTimeout(function(){
+    const quiz_type = '<%= quiz.class.to_s %>';
+    switch(quiz_type){
+      case 'SelectionQuiz':
+        window.location.href = "/selection_quizzes/<%= quiz.id %>";
+        break;
+      case 'DescriptiveQuiz':
+        window.location.href = "/descriptive_quizzes/<%= quiz.id %>";
+        break;
+      default:
+        window.location.href = "/";
+    }
+  }, 2*1000);
+</script>

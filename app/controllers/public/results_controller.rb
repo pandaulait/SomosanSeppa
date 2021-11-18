@@ -6,43 +6,46 @@ class Public::ResultsController < ApplicationController
   end
 
   def show
-    @quiz = SelectionQuiz.find(params[:selection_quiz_id])
     @result = Result.find(params[:id])
+    @quiz = @result.quiz
     render layout: 'answer'
   end
 
   def create
-    @answers = normalize(params[:result][:answer])
-    @quiz = SelectionQuiz.find(params[:selection_quiz_id])
-    @result = @quiz.results.new
-    @result.user_id = current_user.id
-    @choices = @quiz.choices
-    i = 0
-    all_correct = true
-    correct_count = 0
-    # 回答と解答からスコアを保存
-    @choices.each do |choice|
-      if choice.is_answer == @answers[i]
-        correct_count += 1
+    result = Result.new(result_params)
+    result.user_id = current_user.id
+    case result.quiz_type
+    # SelectionQuiz 解答作成
+    when 'SelectionQuiz'
+      @answers = normalize(params[:result][:answer])
+      if Result.selection_quiz_save(@answers, result)
+        @result = result.quiz.results.where(user_id: current_user.id).last
+        current_user.get_exp(10) # 経験値の取得
+        redirect_to selection_quiz_result_path(@result.quiz, @result)
       else
-        all_correct &= false
+        redirect_to selection_quiz_path(@result.quiz)
       end
-      i += 1
-    end
-    @result.content = all_correct
-    @result.correct_count = correct_count
-    @result.answer = @answers.join(' ')
-    if @result.save
-      current_user.get_exp(10)
-      redirect_to selection_quiz_result_path(@quiz, @result)
-    else
-      render('selection_quiz/show')
+    # DescriptiveQuiz 解答作成
+    when 'DescriptiveQuiz'
+      @answer = params[:result][:answer]
+      if Result.descriptive_quiz_save(@answer, result)
+        @result = result.quiz.results.where(user_id: current_user.id).last
+        current_user.get_exp(10) # 経験値の取得
+        redirect_to descriptive_quiz_result_path(@result.quiz, @result)
+      else
+        redirect_to descriptive_quiz_path(params[:descriptive_quiz_id])
+      end
     end
   end
 
   private
 
-  # is_answersの正気化
+  def result_params
+    params.require(:result).permit(:quiz_id, :quiz_type)
+  end
+
+  # is_answersの正規化(チェックボックスを配列で取得した際に余計に送られる0を消す。)
+  # 解答[0, 1] -> params[0, 0, 1] -> normalize後[0, 1]
   def normalize(array)
     flag = 0
     i = 0

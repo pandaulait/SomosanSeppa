@@ -1,5 +1,5 @@
 class Chat < ApplicationRecord
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 200 }
   belongs_to :user
   belongs_to :chat_room
   has_one :activity, as: :subject, dependent: :destroy

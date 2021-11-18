@@ -8,8 +8,7 @@ class Public::TodayQuizzesController < ApplicationController
     today_quizzes = TodayQuiz.where(content: Date.today)
     @number = current_user.today_status
     @quiz = today_quizzes[@number].quiz
-    @choices = @quiz.choices
-    @result = TodayResult.new
+    @result = @quiz.today_results.new
     # byebug
   end
 
