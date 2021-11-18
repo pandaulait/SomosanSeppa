@@ -1,7 +1,7 @@
 class Public::SelectionQuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: %i[edit update]
-  before_action :ensure_normal_admin, only: [:update]
+  before_action :ensure_normal_admin, only: %i[update]
   before_action :ensure_today_quiz, only: %i[edit update]
   before_action :reach_phase1, only: %i[new create edit update]
 

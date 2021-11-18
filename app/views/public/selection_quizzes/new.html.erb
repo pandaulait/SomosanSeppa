@@ -1,4 +1,6 @@
-<%= link_to '記述式クイズを作る', new_descriptive_quiz_path %>
+<% if current_user.reach_phase?(3) %>
+<%= link_to '記述式クイズを作る', new_descriptive_quiz_path, class: "sbtn btn-3" %>
+<% end %>
 <%= form_with model: @quiz, url: selection_quizzes_path, remote: true do |f| %>
   <h4 class="yusei-magic pl-3 pt-3 mx-auto">クイズ新規作成</h4>
   <div class="quiz-content mt-2">
