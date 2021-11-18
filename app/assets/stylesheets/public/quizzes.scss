@@ -21,6 +21,9 @@ $cLightAnswer: #f0dce3;
     background: $cWhite;
     padding: 1rem;
     border-radius: 7px;
+    &-image{
+      width: 100%;
+    }
   }
   &-choice{
     background: $cWhite;

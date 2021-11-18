@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
     get 'selection_quizzes/random_select', to: 'selection_quizzes#random_select'
     get 'selection_quizzes/seppa', to: 'selection_quizzes#seppa'
+    patch 'selection_quiz_image_destroy/:id' => 'selection_quizzes#image_desttroy', as: 'selection_quiz_image_destroy'
     resources :selection_quizzes do
       resources :results, only: %i[create show]
       # get '/answer' => 'results#answer', as: 'answer'

@@ -1,5 +1,7 @@
 class SelectionQuiz < ApplicationRecord
   enum status: { unauthenticated: 0, authenticated: 1, unpublished: 2 }
+  has_one_attached :image
+  # validate :image_type
 
   validates :content,     presence: true, length: { in: 3..200 }
   validates :explanation, presence: true, length: { in: 3..500 }
@@ -30,4 +32,17 @@ class SelectionQuiz < ApplicationRecord
   end
   # 有効={未認証, 認証済み}スコープ
   scope :published, -> { where(status: 0..1) }
+
+  # private
+  # # 画像のバリデーション(png,jpeg)
+  # def image_type
+  #   # return unless
+  #   byebug
+  #   if !image.present?
+  #     if !image.blob.content_type.in?(%('image/jpeg image/png'))
+  #       image.purge
+  #       errors.add(:image, 'はJPEGまたはPNG形式を選択してアップロードしてください')
+  #     end
+  #   end
+  # end
 end

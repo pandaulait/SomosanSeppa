@@ -1,7 +1,12 @@
 <%= form_with model: @quiz, url: selection_quizzes_path, remote: true do |f| %>
   <h4 class="yusei-magic pl-3 pt-3 mx-auto">クイズ新規作成</h4>
   <%= f.text_area :content , :placeholder => "問題文を書こう(10〜200文字)\n(例)「そもさん」とは、どう言う意味？", class: "form-control mb-4 quiz-content-textarea" %>
+  <!--クイズ本文-->
   <span class="quiz_content-error"><%= render 'layouts/error_messages', obj: @quiz, column: :content %></span>
+  <!--レベルがフェーズ2に達していたら画像編集ページを表示-->
+  <% if current_user.reach_phase?(2) %>
+    <%= f.file_field :image %>
+  <% end %>
   <div class=" p-2">
     <%= f.fields_for :choices do |i| %>
       <div class="d-flex choice_input">
@@ -31,20 +36,15 @@
                           <input type="button" value="－" class="remove pluralBtn m-1">
                         </div>`
   $(document).on("click", ".add", function () {
-    // $(this).addClass("m-5");
     var target = $(this)
     if (target.parent().children(".choice_input").length < 6 ){
       $(choices_form).insertBefore(this);
     }
   });
   $(document).on("click", ".remove", function () {
-    // $(this).addClass("m-5");
     var target = $(this).parent()
     if (target.parent().children(".choice_input").length > 2){
       target.remove()
     }
   });
 </script>
-
-                          <!--<input name="quiz[choices][][is_answer]" type="hidden" value="false">-->
-                          <!--<input name="quiz[choices][][is_answer]" type="checkbox" value="true" id="quiz_choices_send">-->

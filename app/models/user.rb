@@ -77,6 +77,21 @@ class User < ApplicationRecord
     ua_level.update_all(read: true) if ua_level.present?
   end
 
+  # フェーズ管理
+  # ユーザーのレベルがフェーズ1に達しているか
+  def reach_phase?(phase)
+    case phase
+    when 1
+      level >= 5
+    when 2
+      level >= 10
+    when 3
+      level >= 15
+    when 4
+      level >= 20
+    end
+  end
+
   private
 
   def create_activities
