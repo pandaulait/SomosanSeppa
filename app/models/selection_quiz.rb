@@ -23,26 +23,4 @@ class SelectionQuiz < ApplicationRecord
   def solved_times_by(user)
     results.where(user_id: user.id).count today_results.where(user_id: user.id).count
   end
-
-  # # ユーザーの最近解いてないクイズを1問用意する
-  # def self.randomly_selected(user)
-  #   len = 5
-  #   len = SelectionQuiz.all.published.size if SelectionQuiz.all.published.size < len
-  #   quizzes_number = SelectionQuiz.all.published.map { |q| [q.id, q.solved_times_by(user)] }
-  #   quiz_number =  quizzes_number.sort { |a, b| a[1] <=> b[1] }[0..len].sample[0]
-  #   find(quiz_number)
-  # end
-
-  # private
-  # # 画像のバリデーション(png,jpeg)
-  # def image_type
-  #   # return unless
-  #   byebug
-  #   if !image.present?
-  #     if !image.blob.content_type.in?(%('image/jpeg image/png'))
-  #       image.purge
-  #       errors.add(:image, 'はJPEGまたはPNG形式を選択してアップロードしてください')
-  #     end
-  #   end
-  # end
 end

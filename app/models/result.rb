@@ -4,7 +4,7 @@ class Result < ApplicationRecord
   validates :quiz_type, presence: true
   validates :correct_count, presence: true, if: proc { |result| result.quiz_type == 'SelectionQuiz' }
   validates :content, inclusion: { in: [true, false] }
-  validates :answer, presence: true
+  validates :answer, presence: true, if: proc { |result| result.quiz_type == 'SelectionQuiz' }
   belongs_to :user
   belongs_to :quiz, polymorphic: true
 

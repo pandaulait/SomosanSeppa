@@ -1,5 +1,5 @@
 <!--解説の表示-->
-<span class="yusei-magic-l pl-3 pt-3 mx-auto">解説</span>
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">解説・意図</span>
 <div class="quiz-explanation my-3">
   <%= text_url_to_link(h(safe_join(quiz.explanation.split("\n"),tag(:br)))).html_safe %>
 </div>
@@ -12,5 +12,13 @@
   <%= safe_join(quiz.content.split("\n"),tag(:br)) %>
   <% if quiz.image.attached? %>
     <%= image_tag quiz.image ,class: "quiz-content-image mt-2"%>
+  <% end %>
+</div>
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">あなたの回答</span>
+<div class="quiz-choice">
+  <% if result.answer.present? %>
+    <%= result.answer %>
+  <% else %>
+    <span class="yusei-magic pl-2">無回答</span>
   <% end %>
 </div>

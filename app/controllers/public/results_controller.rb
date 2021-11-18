@@ -25,6 +25,7 @@ class Public::ResultsController < ApplicationController
       else
         redirect_to selection_quiz_path(@result.quiz)
       end
+    # DescriptiveQuiz 解答作成
     when 'DescriptiveQuiz'
       @answer = params[:result][:answer]
       if Result.descriptive_quiz_save(@answer, result)

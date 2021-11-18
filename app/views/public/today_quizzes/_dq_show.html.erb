@@ -1,0 +1,23 @@
+<span class="yusei-magic-l pl-3 pt-3 mx-auto ">問題　</span>
+<span class="yusei-magic">(作:</span>
+<%= render 'public/users/quiz_author_icon' ,quiz: quiz %>
+<span class="yusei-magic"><%= quiz.user.name %> さん<%= ', 管理者認証済' if quiz.authenticated? %>)</span>
+
+<div class="quiz-content mt-2">
+  <%= safe_join(quiz.content.split("\n"),tag(:br)) %>
+  <% if quiz.image.attached? %>
+    <%= image_tag quiz.image ,class: "quiz-content-image"%>
+  <% end %>
+</div>
+
+
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">選択肢　</span>
+<span class="yusei-magic">(模範回答は1つ以上)</span>
+<%= form_with model: result, url: today_results_path, local: true do |f| %>
+  <%= f.text_field :answer, class: "form-control" %>
+  <%= f.hidden_field :quiz_type %>
+  <%= f.hidden_field :quiz_id %>
+  <%= f.submit '回答する', class: "mr-2 ml-auto mbtn btn-1" %>
+<% end %>
+
+
