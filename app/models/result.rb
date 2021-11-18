@@ -2,7 +2,7 @@ class Result < ApplicationRecord
   validates :user_id, presence: true
   validates :quiz_id, presence: true
   validates :quiz_type, presence: true
-  validates :correct_count, presence: true, if: Proc.new { |result| result.quiz_type == "SelectionQuiz" }
+  validates :correct_count, presence: true, if: proc { |result| result.quiz_type == 'SelectionQuiz' }
   validates :content, inclusion: { in: [true, false] }
   validates :answer, presence: true
   belongs_to :user
