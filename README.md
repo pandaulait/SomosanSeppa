@@ -137,6 +137,7 @@ https://spice-factory.co.jp/development/has-and-belongs-to-many-table/
 - GoogleNaturalLanguageAPIのEntity構文解析が、短文すぎるとEntityを抜き取ってくれないことへの対策
 - ワードクラウドの重要度評価方式の変更と正規化
 - クイズにタグ機能とタグソート機能を追加
+- ツイッターで呟ける機能
 etc.
 ## 管理者側
 - 通知を送ることふができるフォームページの作成
