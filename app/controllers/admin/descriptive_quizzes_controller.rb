@@ -1,5 +1,5 @@
 class Admin::DescriptiveQuizzesController < ApplicationController
- before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :admin_user
   before_action :ensure_normal_admin, only: [:update]
   layout 'admin'

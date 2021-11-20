@@ -17,6 +17,6 @@ class Public::QuizzesController < ApplicationController
     @d_quizzes = @d_quizzes.authenticated if params[:sort] == '0'
     @d_quizzes = @d_quizzes.unauthenticated if params[:sort] == '1'
     @quizzes = @s_quizzes + @d_quizzes
-    @quizzes = @quizzes.sort{|a,b| a.created_at <=> b.created_at}.reverse
+    @quizzes = @quizzes.sort { |a, b| a.created_at <=> b.created_at }.reverse
   end
 end

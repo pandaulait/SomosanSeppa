@@ -77,4 +77,3 @@ gem 'devise-i18n'
 gem 'enum_help'
 gem 'jqcloud-rails'
 gem 'rails-i18n'
-
