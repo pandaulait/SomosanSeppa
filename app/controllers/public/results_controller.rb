@@ -8,32 +8,32 @@ class Public::ResultsController < ApplicationController
   def show
     @result = Result.find(params[:id])
     @quiz = @result.quiz
+    if @result.quiz_type == "DescriptiveQuiz"
+      @entities = @quiz.get_entities
+    end
+
     render layout: 'answer'
   end
 
   def create
-    result = Result.new(result_params)
-    result.user_id = current_user.id
-    case result.quiz_type
+    @result = Result.new(result_params)
+    @result.user_id = current_user.id
+    case @result.quiz_type
     # SelectionQuiz 解答作成
     when 'SelectionQuiz'
       @answers = normalize(params[:result][:answer])
-      if Result.selection_quiz_save(@answers, result)
-        @result = result.quiz.results.where(user_id: current_user.id).last
+      if Result.selection_quiz_save(@answers, @result)
+        result = @result.quiz.results.where(user_id: current_user.id).last
         current_user.get_exp(10) # 経験値の取得
-        redirect_to selection_quiz_result_path(@result.quiz, @result)
-      else
-        redirect_to selection_quiz_path(@result.quiz)
+        redirect_to selection_quiz_result_path(@result.quiz, result)
       end
     # DescriptiveQuiz 解答作成
     when 'DescriptiveQuiz'
       @answer = params[:result][:answer]
-      if Result.descriptive_quiz_save(@answer, result)
-        @result = result.quiz.results.where(user_id: current_user.id).last
+      if Result.descriptive_quiz_save(@answer, @result)
+        result = @result.quiz.results.where(user_id: current_user.id).last
         current_user.get_exp(10) # 経験値の取得
-        redirect_to descriptive_quiz_result_path(@result.quiz, @result)
-      else
-        redirect_to descriptive_quiz_path(params[:descriptive_quiz_id])
+        redirect_to descriptive_quiz_result_path(@result.quiz, result)
       end
     end
   end

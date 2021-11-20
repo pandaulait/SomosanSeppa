@@ -1,13 +1,13 @@
 <% i =1 %>
 <h3 class="yusei-magic-l text-right mr-2">スコア：<%= current_user.today_quiz_score %>問正解/5問中</h3>
 <% @today_quizzes.each do |tq| %>
-  <% j = (tq.correct_answerer.to_f / tq.challenger.to_f)*100 %>
+  <% j = (tq[0].correct_answerer.to_f / tq[0].challenger.to_f)*100 %>
   <h2 class="yusei-magic mb-2 mt-5">第 <%= i %> 問<span class="yusei-magic-l">　(正答率<%= j.to_i %>%)</span></h2>
-  <% case tq.quiz_type %>
+  <% case tq[0].quiz_type %>
   <% when "SelectionQuiz" then %>
-    <%= render 'public/results/sq_show',{ quiz: tq.quiz, result: tq.today_results.find_by(user_id: current_user.id)} %>
+    <%= render 'public/results/sq_show',{ quiz: tq[1], result: tq[2]} %>
   <% when "DescriptiveQuiz" then %>
-    <%= render 'public/results/dq_show',{ quiz: tq.quiz, result: tq.today_results.find_by(user_id: current_user.id)} %>
+    <%= render 'public/results/dq_show',{ quiz: tq[1], result: tq[2], entities: tq[3] }%>
   <% end %>
   <% i+= 1 %>
 

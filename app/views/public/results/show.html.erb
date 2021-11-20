@@ -2,6 +2,6 @@
 <% when "SelectionQuiz" then %>
   <%= render 'public/results/sq_show',{ quiz: @quiz, result: @result} %>
 <% when "DescriptiveQuiz" then %>
-  <%= render 'public/results/dq_show',{ quiz: @quiz, result: @result} %>
+  <%= render 'public/results/dq_show',{ quiz: @quiz, result: @result, entities: @entities} %>
 <% end %>
 <%= link_to '戻る' , root_path ,class: "mbtn btn-2 mt-5"%>

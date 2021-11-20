@@ -1,8 +1,15 @@
+<!--ワードクラウドの表示-->
+<span class="yusei-magic-l pl-3 pt-3 mx-auto">みんなの回答</span>
+<div class="row">
+  <div id = "result-jQCloud-<%= result.id %>" style="width: 100%; height: 50vh;"></div>
+</div>
 <!--解説の表示-->
+<% if quiz.explanation.present? %>
 <span class="yusei-magic-l pl-3 pt-3 mx-auto">解説・意図</span>
 <div class="quiz-explanation my-3">
   <%= text_url_to_link(h(safe_join(quiz.explanation.split("\n"),tag(:br)))).html_safe %>
 </div>
+<% end %>
 <!--問題の表示-->
 <span class="yusei-magic-l pl-3 pt-3 mx-auto">問題　</span>
 <span class="yusei-magic">(作:</span>
@@ -22,3 +29,19 @@
     <span class="yusei-magic pl-2">無回答</span>
   <% end %>
 </div>
+
+
+
+
+<script>
+  var words = [
+    <% entities.each do |word| %>
+    {text: '<%= word[:entity] %>', weight: <%= word[:score] %>},
+    <% end %>
+    {text: '', weight: '0'},
+  ];
+  $('#result-jQCloud-<%=result.id%>').jQCloud(words, {
+
+    // colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"]
+  });
+</script>
