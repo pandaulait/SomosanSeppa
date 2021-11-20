@@ -29,8 +29,7 @@ module Language
       response_body['entities'].each do |text|
         array << { entity: text['name'], score: text['salience'] } if text['name']
       end
-      
-      
+
       if (error = response_body['error']).present?
         raise error['message']
       else

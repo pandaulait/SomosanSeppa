@@ -8,9 +8,7 @@ class Public::ResultsController < ApplicationController
   def show
     @result = Result.find(params[:id])
     @quiz = @result.quiz
-    if @result.quiz_type == "DescriptiveQuiz"
-      @entities = @quiz.get_entities
-    end
+    @entities = @quiz.get_entities if @result.quiz_type == 'DescriptiveQuiz'
 
     render layout: 'answer'
   end

@@ -21,14 +21,16 @@ class TodayQuiz < ApplicationRecord
     end
     all_valid
   end
+
   # 今日の五問はすでに作られたか
   def self.five_created?
     TodayQuiz.where(content: Date.today).present?
   end
+
   # 今日の記述式クイズのエンティティを取得
   def get_entities
     @results = today_results + quiz.results
-    @entities = @results.map { |r| r.answer}.join(",")
+    @entities = @results.map { |r| r.answer }.join(',')
     @entities = Language.get_data(@entities)
     @entities
   end

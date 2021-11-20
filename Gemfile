@@ -75,5 +75,6 @@ end
 
 gem 'devise-i18n'
 gem 'enum_help'
-gem 'rails-i18n'
 gem 'jqcloud-rails'
+gem 'rails-i18n'
+
