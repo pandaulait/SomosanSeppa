@@ -25,7 +25,7 @@ class DescriptiveQuiz < ApplicationRecord
   # 記述式クイズのエンティティを取得
   def get_entities
     @results = results + today_results
-    @entities = @results.map { |r| r.answer}.join(",")
+    @entities = @results.map { |r| r.answer }.join(',')
     @entities = Language.get_data(@entities)
     @entities
   end

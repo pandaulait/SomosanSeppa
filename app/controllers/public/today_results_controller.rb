@@ -4,8 +4,9 @@ class Public::TodayResultsController < ApplicationController
   layout 'answer'
   def index
     @today_quizzes = TodayQuiz.where(content: Date.today)
-    @today_quizzes = @today_quizzes.map{|tq| [tq,tq.quiz, tq.today_results.find_by(user_id: current_user.id), tq.get_entities]}
-
+    @today_quizzes = @today_quizzes.map do |tq|
+      [tq, tq.quiz, tq.today_results.find_by(user_id: current_user.id), tq.get_entities]
+    end
   end
 
   def create
