@@ -10,10 +10,10 @@ class Public::QuizzesController < ApplicationController
 
   # クイズ一覧
   def index
-    @s_quizzes = SelectionQuiz.all.order(created_at: :desc)
+    @s_quizzes = SelectionQuiz.all.published.order(created_at: :desc)
     @s_quizzes = @s_quizzes.authenticated if params[:sort] == '0'
     @s_quizzes = @s_quizzes.unauthenticated if params[:sort] == '1'
-    @d_quizzes = DescriptiveQuiz.all.order(created_at: :desc)
+    @d_quizzes = DescriptiveQuiz.all.published.order(created_at: :desc)
     @d_quizzes = @d_quizzes.authenticated if params[:sort] == '0'
     @d_quizzes = @d_quizzes.unauthenticated if params[:sort] == '1'
     @quizzes = @s_quizzes + @d_quizzes
