@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
     get 'quizzes/somosan', to: 'quizzes#somosan'
     get 'quizzes/seppa', to: 'quizzes#seppa'
+    resources :quizzes, only: %i[index]
+    
     patch 'selection_quiz_image_destroy/:id' => 'selection_quizzes#image_desttroy', as: 'selection_quiz_image_destroy'
     resources :selection_quizzes do
       resources :results, only: %i[create show]
