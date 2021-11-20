@@ -2,6 +2,7 @@
 サイトurl : http://somosanseppa.com/
 
 <img width="1579" alt="スクリーンショット 2021-11-09 18 18 44" src="https://user-images.githubusercontent.com/84437188/140896845-eab05fe8-9425-48fb-b087-85fc9a982865.png">
+
 # サイト概要
 「そもさんせっぱ」はユーザーにとって問いと学びをより身近にするための機会作りを行うアプリケーションです。
 ## 目的、ゴール
