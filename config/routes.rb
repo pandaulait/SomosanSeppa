@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'descriptive_quizzes/show'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, controllers: {
     sessions: 'public/devise/sessions',
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
     get 'quizzes/somosan', to: 'quizzes#somosan'
     get 'quizzes/seppa', to: 'quizzes#seppa'
     resources :quizzes, only: %i[index]
-    
+
     patch 'selection_quiz_image_destroy/:id' => 'selection_quizzes#image_desttroy', as: 'selection_quiz_image_destroy'
     resources :selection_quizzes do
       resources :results, only: %i[create show]
@@ -52,11 +55,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :selection_quizzes, only: %i[show update index show]
+    resources :selection_quizzes, only: %i[show update index]
+    resources :descriptive_quizzes, only: %i[show update index show]
     resources :categories, only: %i[index create destroy]
     resources :users, only: %i[index update]
     resources :chat_rooms, only: %i[index show] do
       resources :chats, only: %i[create]
     end
+    resources :quizzes, only: %i[update index show]
   end
 end
