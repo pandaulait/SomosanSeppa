@@ -11,13 +11,13 @@ class Admin::QuizzesController < ApplicationController
     @d_quizzes = @d_quizzes.authenticated if params[:sort] == '0'
     @d_quizzes = @d_quizzes.unauthenticated if params[:sort] == '1'
     @quizzes = @s_quizzes + @d_quizzes
-    @quizzes = @quizzes.sort{|a,b| a.created_at <=> b.created_at}.reverse
+    @quizzes = @quizzes.sort { |a, b| a.created_at <=> b.created_at }.reverse
   end
 
-  def show
-  end
+  def show; end
 
   private
+
   # 管理者ユーザー判定
   def admin_user
     return if current_user.admin?
@@ -25,6 +25,7 @@ class Admin::QuizzesController < ApplicationController
     flash[:alert] = '管理者権限がありません。'
     redirect_to root_path
   end
+
   # ゲスト管理者判定
   def ensure_normal_admin
     return if current_user.email != 'admin@example.com'
