@@ -1,0 +1,36 @@
+<%#= link_to '認証済のみ' , selection_quizzes_path(sort: 0), class: "ml-3 text-dark" %>
+<%#= link_to '未認証のみ' , selection_quizzes_path(sort: 1), class: "text-dark"  %>
+<%#= link_to '全表示' , selection_quizzes_path, class: "text-dark" %>
+<table class="table">
+  <thead>
+    <th>問題文</th>
+    <th>作者</th>
+    <th>解かれた回数</th>
+  </thead>
+  <tbody>
+    <% @quizzes.each do |quiz| %>
+      <tr>
+        <td>
+          <% if quiz.status =="authenticated" %>[認]<% end %>
+          <% case quiz.class.to_s %>
+          <% when "DescriptiveQuiz" %>
+            <%= link_to descriptive_quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %>
+          <% when "SelectionQuiz" %>
+            <%= link_to selection_quiz_path(quiz) do %><%= quiz.content.truncate(8) %><% end %>
+          <% end %>
+        </td>
+
+        <td><%= render 'public/users/quiz_author_icon', quiz: quiz %> <%= quiz.user.name %></td>
+        <td>
+          <%= quiz.solved_times %>回(
+          <% if current_user.answered?(quiz) %>
+            <%= quiz.solved_times_by(current_user) %>回
+          <% else %>
+            未
+          <% end %>)
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
