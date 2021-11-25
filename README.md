@@ -126,7 +126,7 @@ ver 2.0 のアソシエーション
 科学的に間違いのある問いを認証していた場合の対処。管理者がクイズを認証する際の確認フローを構築、共有すべき。
 - 障害の発見と復旧手法
 通知機能にアップデート機能も盛り込んでも良いかもしれない
-## 
+
 # 参考文献
 https://spice-factory.co.jp/development/has-and-belongs-to-many-table/
 
@@ -139,19 +139,26 @@ https://spice-factory.co.jp/development/has-and-belongs-to-many-table/
 - クイズにタグ機能とタグソート機能を追加
 - ツイッターで呟ける機能
 - ISBN_APIを用いて参考にした本などを登録しやすくする
+- 退会ボタンの作成
+- マイページで作成したクイズ一覧表示
 etc.
 ## 管理者側
 - 通知を送ることふができるフォームページの作成
+- ユーザーが退会した場合、ログインできなくなる機能、クイズは残る設定
 etc.
+## その他
+- N+１対策
+- メソッドのダイエット
 # Docの編集の履歴
-2021/11/09
-2021/11/20
+2021/11/09<br>
+2021/11/20<br>
+2021/11/25
 
 # 開発環境
 - OS : Linux(CentOS)
 - 言語 : HTML,CSS,Javascript,Ruby
 - フレームワーク : Ruby on Rails
-- JSライブラリ : jQuery
+- JSライブラリ : jQuery, jQcloud
 - IDE : Cloud9
 # 本番環境
 - EC2
