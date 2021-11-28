@@ -1,5 +1,7 @@
-<% if quiz.user.profile_image.attached? %>
-  <%= image_tag quiz.user.profile_image, class: "quiz-author-icon"%>
-<% else %>
- <%= image_tag 'no_image.jpg', class: "quiz-author-icon" %>
+<%= link_to user_path(quiz.user) do %>
+  <% if quiz.user.profile_image.attached? %>
+    <%= image_tag quiz.user.profile_image, class: "quiz-author-icon"%>
+  <% else %>
+   <%= image_tag 'no_image.jpg', class: "quiz-author-icon" %>
+  <% end %>
 <% end %>

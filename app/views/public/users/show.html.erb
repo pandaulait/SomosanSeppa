@@ -19,5 +19,32 @@
 <% if @user.id == current_user.id %>
   <p><%= link_to "プロフィール編集", edit_user_path(@user) , class: "mbtn btn-1"%></p>
   <p><%= link_to "結果一覧", user_results_path(@user), class: "mbtn btn-2" %></p>
+<% else %>
+  <p><%= link_to "トップに戻る", root_path(@user) , class: "mbtn btn-1"%></p>
 <% end %>
 
+<table class="table">
+  <thead>
+    <th>問題文</th>
+    <th>解かれた回数</th>
+  </thead>
+  <tbody>
+    <% @quizzes.each do |quiz| %>
+      <tr>
+        <td>
+          <%= render 'public/users/quiz_author_icon', quiz: quiz %>
+          <% if quiz.status =="authenticated" %>[認]<% else %>[未]<% end %>
+          <% case quiz.class.to_s %>
+          <% when "DescriptiveQuiz" %>
+            <%= link_to descriptive_quiz_path(quiz) do %><%= quiz.content.truncate(10) %><% end %>
+          <% when "SelectionQuiz" %>
+            <%= link_to selection_quiz_path(quiz) do %><%= quiz.content.truncate(10) %><% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= quiz.solved_times %>回
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
