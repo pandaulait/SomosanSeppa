@@ -1,3 +1,11 @@
+<div class="dropdown text-right">
+  <button class="dropdown-toggle btn-not" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-cog"></i>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <%= link_to "退会", users_confirm_path, class: "dropdown-item"%>
+  </div>
+</div>
 
 <h2 class="yusei-magic">プロフィール編集</h2>
 <%= form_with model: @user, remote: true do |f| %>

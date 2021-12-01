@@ -1,7 +1,8 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, except: [:show]
+  before_action :ensure_correct_user, except: [:show, :confirm]
   before_action :ensure_normal_user, only: [:update]
+  
   def show
     @user = User.find(params[:id])
     @user.all_read_leveled_up
@@ -17,6 +18,19 @@ class Public::UsersController < ApplicationController
     redirect_to user_path(@user) if @user.update(user_params)
   end
 
+  def confirm
+    
+  end
+
+  def destroy
+    @user = current_user
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = 'ありがとうございました。またのご利用を心よりお待ちしております。'
+    redirect_to root_path
+  end
+  
+  
   private
 
   # 編集されるユーザーとcurrent_userが同じかどうか
