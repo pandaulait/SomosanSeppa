@@ -1,0 +1,8 @@
+
+<div class="my-5 mx-3">
+  <h1 class="yusei-magic mb-3">本当に退会しますか?</h1>
+  <p class="yusei-magic">退会すると会員登録情報やこれまでの記事の編集が行えなくなります。
+  <br>上記を踏まえた上で、退会する場合は、「退会する」をクリックしてください。</p>
+</div>
+<p><%= link_to "もどる", root_path, class: "mbtn btn-1"%></p>
+<p><%= link_to "退会", user_path(current_user), method: :delete, class: "mbtn btn-4"%></p>

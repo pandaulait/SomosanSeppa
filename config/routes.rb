@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   # }
 
   scope module: :public do
-    resources :users, only: %i[show edit update] do
+    get 'users/confirm', to: 'users#confirm'
+    resources :users, only: %i[show edit update destroy] do
       resources :results, only: [:index]
     end
     get 'quizzes/somosan', to: 'quizzes#somosan'
